@@ -8,3 +8,10 @@ const contestants=[
 {rank:61,id:56,name:'MAX 3'},{rank:62,id:49,name:'Taiyang/Colorpen'},{rank:63,id:41,name:'LLMHAO'},{rank:64,id:3,name:'Yurennimbus'},{rank:65,id:19,name:'Chen天摸鱼'},{rank:66,id:35,name:'ObobrE'},{rank:67,id:47,name:'Carbon Bag'},{rank:68,id:69,name:'马 小麦'},{rank:69,id:68,name:'TGASUX'},{rank:70,id:14,name:'SintheH'},
 {rank:71,id:9,name:'笔干哥'},{rank:72,id:15,name:'ThnderX'},{rank:73,id:39,name:'Double Helix'},{rank:74,id:62,name:'Lest'},{rank:75,id:25,name:'秋诗Akiuta'},{rank:76,id:76,name:'Aurius'}
 ].map(x=>({...x,creativity:0,structure:0,musicality:0,production:0,total:0}));
+
+if(document.getElementById('podium')){
+  const podiumEl=document.getElementById('podium'),listEl=document.getElementById('list'),searchEl=document.getElementById('search'),idEl=document.getElementById('id'),resultEl=document.getElementById('result');
+  podiumEl.innerHTML=contestants.slice(0,3).map(x=>`<a href="detail.html?id=${x.id}" class="card" style="display:block;color:inherit;text-decoration:none"><small>RANK</small><strong>0${x.rank}</strong><h3>${x.name}</h3><span>参赛编号 ${x.id} · 综合得分 ${x.total.toFixed(2)}</span></a>`).join('');
+  listEl.innerHTML=contestants.slice(3).map(x=>`<a href="detail.html?id=${x.id}" class="row" style="color:inherit;text-decoration:none"><strong>${String(x.rank).padStart(2,'0')}</strong><b>${x.name}</b><span>编号 ${x.id} · ${x.total.toFixed(2)} 分</span></a>`).join('');
+  searchEl.onsubmit=e=>{e.preventDefault();const x=contestants.find(v=>v.id==idEl.value);resultEl.style.display='block';resultEl.innerHTML=x?`<a href="detail.html?id=${x.id}" style="color:inherit;text-decoration:none"><strong>#${x.rank}</strong><b>${x.name}</b> · 编号 ${x.id} · 综合得分 ${x.total.toFixed(2)}<br><small>点击查看各维度评分 →</small></a>`:`未找到编号 <b>${idEl.value||'—'}</b>`};
+}
