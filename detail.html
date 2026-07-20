@@ -1,1 +1,83 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>评分详情｜Ocean Rank</title><style>*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 75% 15%,#07527a55,transparent 30%),#020a12;color:#eafaff;font-family:Arial,"Microsoft YaHei",sans-serif}.wrap{width:min(760px,calc(100% - 30px));margin:auto;padding:35px 0 60px}.back{color:#6cdaeb;text-decoration:none;font-size:12px}.head{margin:35px 0 18px;padding:35px;border:1px solid #7fdfff22;background:#071724dd}.eyebrow{font-size:9px;letter-spacing:.2em;color:#57d8ec}.head h1{font-size:38px;margin:12px 0 5px}.meta{color:#7994a4;font-size:12px}.rank{display:flex;justify-content:space-between;align-items:end;margin-top:28px}.rank strong{display:block;font-size:64px;color:#36e6ff;line-height:.9}.total{text-align:right}.total b{display:block;font-size:32px}.total small,.rank small{color:#7994a4}.scores{display:grid;grid-template-columns:1fr 1fr;gap:12px}.score{border:1px solid #7fdfff22;background:#061421;padding:22px}.score span{font-size:12px;color:#8ba5b3}.score strong{display:block;font-size:32px;margin:10px 0}.score small{color:#58cfe2}.formula{margin-top:18px;border:1px solid #36e6ff22;padding:18px;color:#7895a5;font-size:11px;line-height:1.8}@media(max-width:560px){.head{padding:25px 20px}.head h1{font-size:28px;overflow-wrap:anywhere}.rank strong{font-size:50px}.scores{grid-template-columns:1fr}}</style></head><body><main class="wrap"><a class="back" href="./">← 返回排行榜</a><section class="head"><div class="eyebrow">PERSONAL SCORE REPORT</div><h1 id="personName">评分详情</h1><div class="meta" id="meta"></div><div class="rank"><div><small>最终排名</small><strong id="personRank"></strong></div><div class="total"><small>综合得分</small><b id="total">0.00</b></div></div></section><section class="scores" id="scores"></section><div class="formula">综合得分 = 编曲创意度 × 25% + 结构完整度 × 15% + 作曲音乐性 × 25% + 混母制作质量 × 35%</div></main><script src="data.js"></script><script>const id=Number(new URLSearchParams(location.search).get('id')),x=contestants.find(v=>v.id===id);if(!x){document.querySelector('.head').innerHTML='<h1>未找到该参赛者</h1>'}else{personName.textContent=x.name;meta.textContent=`参赛编号 ${x.id}`;personRank.textContent=`#${x.rank}`;total.textContent=x.total.toFixed(2);scores.innerHTML=[['编曲创意度','creativity','25%'],['结构完整度','structure','15%'],['作曲音乐性','musicality','25%'],['混母制作质量','production','35%']].map(([n,k,w])=>`<article class="score"><span>${n}</span><strong>${x[k].toFixed(2)}</strong><small>权重 ${w}</small></article>`).join('')}</script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#020a12">
+  <title>复审评分详情｜Ocean Rank</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:radial-gradient(circle at 75% 15%,#07527a55,transparent 30%),linear-gradient(160deg,#020a12,#031521 70%,#020a12);color:#eafaff;font-family:Arial,"Microsoft YaHei",sans-serif}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(#06314a14 1px,transparent 1px),linear-gradient(90deg,#06314a14 1px,transparent 1px);background-size:50px 50px}
+    .wrap{position:relative;width:min(760px,calc(100% - 30px));margin:auto;padding:35px 0 60px}.back{color:#6cdaeb;text-decoration:none;font-size:12px}
+    .head{margin:35px 0 18px;padding:35px;border:1px solid #7fdfff22;background:#071724e8;box-shadow:0 24px 70px #0008}.eyebrow{font-size:9px;letter-spacing:.2em;color:#57d8ec}.head h1{font-size:38px;margin:12px 0 5px;overflow-wrap:anywhere}.meta{color:#7994a4;font-size:12px;line-height:1.8}.rank{display:flex;justify-content:space-between;align-items:end;margin-top:28px}.rank strong{display:block;font-size:64px;color:#36e6ff;line-height:.9}.total{text-align:right}.total b{display:block;font-size:32px}.total small,.rank small{color:#7994a4}
+    .progress{margin:0 0 18px;padding:14px 18px;border:1px solid #36e6ff33;background:#0b33434d;color:#92eefa;font-size:11px;line-height:1.7}.progress b{color:white}
+    .scores{display:grid;grid-template-columns:1fr 1fr;gap:12px}.score{border:1px solid #7fdfff22;background:#061421;padding:22px}.score span{font-size:12px;color:#8ba5b3}.score strong{display:block;font-size:32px;margin:10px 0}.score small{color:#58cfe2}
+    .formula,.comment,.status-card{margin-top:18px;border:1px solid #36e6ff22;padding:18px;color:#7895a5;font-size:11px;line-height:1.8;background:#061421aa}.comment b{display:block;margin-bottom:8px;color:#a9eaf4;font-size:12px}.status-card{padding:28px;border-color:#b4778444;background:#2b1720aa;color:#caaeb4}.status-card h2{margin:0 0 12px;color:#e2bbc3;font-size:23px}.status-card strong{color:#fff}.status-card p{margin:8px 0 0}
+    body.eliminated .head{border-color:#b4778438;background:#21141be8}body.eliminated .eyebrow,body.eliminated .rank strong{color:#c98e9a}body.eliminated .progress{display:none}
+    @media(max-width:560px){.wrap{padding-top:24px}.head{padding:25px 20px;margin-top:24px}.head h1{font-size:28px}.rank strong{font-size:50px}.scores{grid-template-columns:1fr}.meta{font-size:11px}.total b{font-size:26px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="back" href="./">← 返回排行榜</a>
+    <section class="head" id="profile">
+      <div class="eyebrow" id="eyebrow">SEMIFINAL SCORE REPORT</div>
+      <h1 id="personName">评分详情</h1>
+      <div class="meta" id="meta"></div>
+      <div class="rank">
+        <div><small id="rankLabel">复审暂列</small><strong id="personRank"></strong></div>
+        <div class="total" id="totalBox"><small>当前复审得分</small><b id="total">0.00</b></div>
+      </div>
+    </section>
+    <div class="progress" id="progress"><b>复审进度 1 / 3</b> · 当前成绩仅包含第 1 位评委评分，后续评委成绩录入后会继续更新。</div>
+    <section class="scores" id="scores"></section>
+    <div class="comment" id="comment" hidden></div>
+    <div class="formula" id="formula">当前复审得分 = 编曲创意度 × 25% + 结构完整度 × 15% + 作曲音乐性 × 25% + 混母制作质量 × 35%</div>
+    <div class="status-card" id="statusCard" hidden></div>
+  </main>
+  <script src="data.js?v=13"></script>
+  <script>
+    const id=Number(new URLSearchParams(location.search).get("id"));
+    const item=contestants.find(entry=>entry.id===id);
+    const esc=value=>String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
+    if(!item){
+      document.getElementById("profile").innerHTML="<h1>未找到该参赛者</h1><p class='meta'>请返回排行榜重新输入参赛编号。</p>";
+      document.getElementById("progress").hidden=true;
+      document.getElementById("formula").hidden=true;
+    }else if(item.status==="semifinal"){
+      document.title=`${item.name}｜复审评分详情`;
+      document.getElementById("personName").textContent=item.name;
+      document.getElementById("meta").textContent=`参赛编号 ${item.id} · 复审序号 ${item.finalSequence} · 初审第 ${item.prelimRank} 名`;
+      document.getElementById("personRank").textContent=`#${item.rank}`;
+      document.getElementById("total").textContent=item.total.toFixed(2);
+      const dimensions=[
+        ["编曲创意度","creativity","25%"],
+        ["结构完整度","structure","15%"],
+        ["作曲音乐性","musicality","25%"],
+        ["混母制作质量","production","35%"],
+      ];
+      document.getElementById("scores").innerHTML=dimensions.map(([name,key,weight])=>`<article class="score"><span>${name}</span><strong>${item[key].toFixed(2)}</strong><small>权重 ${weight}</small></article>`).join("");
+      if(item.comment){
+        const box=document.getElementById("comment");
+        box.hidden=false;
+        box.innerHTML=`<b>评委评价</b>${esc(item.comment)}`;
+      }
+    }else{
+      document.body.classList.add("eliminated");
+      document.title=`${item.name}｜初审结果`;
+      document.getElementById("eyebrow").textContent="PRELIMINARY ROUND RESULT";
+      document.getElementById("personName").textContent=item.name;
+      document.getElementById("meta").textContent=`参赛编号 ${item.id} · 初审序号 ${item.sequence}`;
+      document.getElementById("rankLabel").textContent="初审最终排名";
+      document.getElementById("personRank").textContent=`#${item.prelimRank}`;
+      document.getElementById("totalBox").hidden=true;
+      document.getElementById("progress").hidden=true;
+      document.getElementById("formula").hidden=true;
+      const card=document.getElementById("statusCard");
+      card.hidden=false;
+      card.innerHTML=`<h2>未晋级复审</h2><p>该作品的初审最终排名为 <strong>第 ${item.prelimRank} 名</strong>。复审已重新开始计分，因此本页面不再展示或沿用初审分数。</p>`;
+    }
+  </script>
+</body>
+</html>

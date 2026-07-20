@@ -1,9 +1,93 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ocean Rank</title><style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#020a12;color:#eafaff;font-family:Arial,"Microsoft YaHei",sans-serif}body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 75% 15%,#07527a55,transparent 30%),linear-gradient(#06314a18 1px,transparent 1px),linear-gradient(90deg,#06314a18 1px,transparent 1px);background-size:auto,50px 50px,50px 50px}nav{height:76px;max-width:1100px;margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #7fdfff22;position:relative}.brand{letter-spacing:.18em}.brand b{color:#36e6ff}.badge,small{font-size:10px;letter-spacing:.2em;color:#57d8ec}.hero{text-align:center;padding:110px 20px 80px}.hero h1{font-size:clamp(56px,10vw,110px);letter-spacing:-.07em;line-height:.9;margin:25px 0}.hero h1 span{color:transparent;-webkit-text-stroke:1px #45daf0}.hero p{color:#849dad;line-height:1.8}.query,.ranking{max-width:980px;margin:0 auto 90px;padding:30px;border:1px solid #7fdfff22;background:#071724dd}.query{display:grid;grid-template-columns:1fr 1.3fr;gap:35px}.query h2,.ranking h2{font-size:30px;margin:8px 0 12px}.search{display:flex;margin-top:12px}.search input{flex:1;background:#020b12;border:1px solid #6ac7df44;color:white;padding:14px}.search button{border:0;background:linear-gradient(135deg,#0ecbe4,#1961d4);color:white;padding:0 24px;font-weight:bold}.result{grid-column:1/-1;padding:18px;border:1px solid #36e6ff33;display:none}.result strong{font-size:32px;color:#36e6ff;margin-right:18px}.podium{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0}.card,.row{border:1px solid #7fdfff20;background:#061421;padding:22px;text-align:center}.card strong{display:block;font-size:45px;color:#36e6ff}.card h3{font-size:14px}.row{display:grid;grid-template-columns:55px 1fr auto;text-align:left;align-items:center;margin-top:8px}.row>strong{font-size:20px;color:#5d899d}.row span{color:#829baa;font-size:12px}footer{text-align:center;color:#4c6b7a;padding:30px;font-size:10px;letter-spacing:.15em}@media(max-width:650px){.query{grid-template-columns:1fr;margin:0 15px 70px}.result{grid-column:auto}.podium{grid-template-columns:1fr}.ranking{margin:0 15px 60px}.row{grid-template-columns:40px 1fr}.row span:last-child{display:none}}
-</style><style>
-@media(max-width:650px){nav{height:62px;padding:0 16px}.brand{font-size:12px}.badge{font-size:8px}.hero{padding:72px 18px 54px}.hero small{font-size:8px;line-height:1.8}.hero h1{font-size:43px;line-height:1.02;letter-spacing:-.045em;margin:20px 0}.hero h1 span{display:inline-block;margin-top:5px;color:#5ee9ff;-webkit-text-stroke:0;text-shadow:0 0 22px #08bfe755}.hero p{font-size:13px;margin:0 auto;max-width:290px}.query{padding:24px 20px;gap:18px}.query h2,.ranking h2{font-size:25px}.query p{font-size:12px;color:#849dad}.search{display:grid;grid-template-columns:1fr}.search input,.search button{width:100%;min-height:46px}.search button{margin-top:9px}.result{font-size:12px;line-height:1.8}.result strong{display:block;font-size:28px;margin:0 0 6px}.ranking{padding:24px 14px}.podium{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:24px 0 18px}.card{padding:16px 5px;min-width:0}.card small{font-size:7px}.card strong{font-size:31px;margin:6px 0}.card h3{font-size:10px;line-height:1.35;min-height:28px;margin:8px 0 5px;overflow-wrap:anywhere}.card span{display:block;font-size:8px;color:#7795a3}.row{grid-template-columns:34px minmax(0,1fr) auto;gap:8px;padding:15px 12px}.row>strong{font-size:16px}.row b{font-size:12px;overflow-wrap:anywhere}.row span:last-child{display:block!important;font-size:9px;white-space:nowrap}footer{font-size:8px;padding:25px 12px}}
-@media(max-width:380px){.hero h1{font-size:38px}.podium{gap:5px}.card strong{font-size:27px}.card{padding:14px 3px}}
-</style></head><body><nav><div class="brand">OCEAN <b>RANK</b></div><div class="badge">PUBLIC RESULTS</div></nav><section class="hero"><small>OCEAN OF US · REMIX CONTEST 2026</small><h1>让每一份声音<br><span>浮出海面</span></h1><p>输入参赛编号，查看这场声浪中属于你的位置。</p></section><section class="query"><div><small>FIND YOUR POSITION</small><h2>查询我的排名</h2><p>输入报名时获得的参赛编号</p></div><form class="search" id="search"><input id="id" inputmode="numeric" placeholder="例如：72"><button>查询排名</button></form><div class="result" id="result"></div></section><section class="ranking"><small>THE LEADERBOARD</small><h2>最终排行榜</h2><div class="podium" id="podium"></div><div id="list"></div></section><footer>OCEAN RANK © 2026 · FINAL EDITION</footer><script>
-document.write('<link rel="stylesheet" href="theme-v5.css"><link rel="stylesheet" href="progress-v11.css">');document.write('<script src="rank-data-v11.js"><\/script>');const data=contestants;
-podium.innerHTML=data.slice(0,3).map(x=>`<a href="detail.html?id=${x.id}" class="card" style="display:block;color:inherit;text-decoration:none"><small>RANK</small><strong>0${x.rank}</strong><h3>${x.name}</h3><span>参赛编号 ${x.id} · 综合得分 ${x.total.toFixed(2)}</span></a>`).join('');list.innerHTML=data.slice(3).map(x=>`<a href="detail.html?id=${x.id}" class="row" style="color:inherit;text-decoration:none"><strong>${String(x.rank).padStart(2,'0')}</strong><b>${x.name}</b><span>编号 ${x.id} · ${x.total.toFixed(2)} 分</span></a>`).join('');search.onsubmit=e=>{e.preventDefault();let x=data.find(v=>v.id==id.value);result.style.display='block';result.innerHTML=x?`<a href="detail.html?id=${x.id}" style="color:inherit;text-decoration:none"><strong>#${x.rank}</strong><b>${x.name}</b> · 编号 ${x.id} · 综合得分 ${x.total.toFixed(2)}<br><small>点击查看各维度评分 →</small></a>`:`未找到编号 <b>${id.value||'—'}</b>`};
-</script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#020a12">
+  <title>Ocean Rank｜复审排行榜</title>
+  <style>
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#020a12;color:#eafaff;font-family:Arial,"Microsoft YaHei",sans-serif}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 75% 15%,#07527a55,transparent 30%),linear-gradient(#06314a18 1px,transparent 1px),linear-gradient(90deg,#06314a18 1px,transparent 1px);background-size:auto,50px 50px,50px 50px}
+    nav{height:76px;max-width:1100px;margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #7fdfff22;position:relative;z-index:4}
+    .brand{letter-spacing:.18em}.brand b{color:#36e6ff}.badge,small{font-size:10px;letter-spacing:.2em;color:#57d8ec}
+    .hero{text-align:center;padding:110px 20px 80px}.hero h1{font-size:clamp(56px,10vw,110px);letter-spacing:-.07em;line-height:.9;margin:25px 0}.hero h1 span{color:transparent;-webkit-text-stroke:1px #45daf0}.hero p{color:#849dad;line-height:1.8}
+    .query,.ranking{max-width:980px;margin:0 auto 90px;padding:30px;border:1px solid #7fdfff22;background:#071724dd}
+    .query{display:grid;grid-template-columns:1fr 1.3fr;gap:35px}.query h2,.ranking h2{font-size:30px;margin:8px 0 12px}.query p{color:#849dad;line-height:1.7}
+    .search{display:flex;margin-top:12px}.search input{flex:1;min-width:0;background:#020b12;border:1px solid #6ac7df44;color:white;padding:14px}.search button{border:0;background:linear-gradient(135deg,#0ecbe4,#1961d4);color:white;padding:0 24px;font-weight:bold;cursor:pointer}
+    .result{grid-column:1/-1;padding:18px;border:1px solid #36e6ff33;display:none}.result strong{font-size:32px;color:#36e6ff;margin-right:18px}
+    .podium{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0}.card,.row{border:1px solid #7fdfff20;background:#061421;text-decoration:none;color:inherit}.card{padding:22px;text-align:center}.card strong{display:block;font-size:45px;color:#36e6ff}.card h3{font-size:14px}.card span{font-size:11px;color:#829baa;line-height:1.7}
+    .row{display:grid;grid-template-columns:55px minmax(0,1fr) auto;gap:14px;align-items:center;margin-top:8px;padding:18px 22px}.rank-number{font-size:20px;font-weight:700;color:#5d899d}.identity{min-width:0}.identity b{display:block;overflow-wrap:anywhere}.identity span{display:block;margin-top:6px;color:#829baa;font-size:11px}.row-score{text-align:right}.row-score b{display:block;color:#baf7ff;font-size:17px}.row-score small{display:block;margin-top:4px;color:#668a9b;letter-spacing:.08em}
+    footer{text-align:center;color:#4c6b7a;padding:30px;font-size:10px;letter-spacing:.15em}
+    @media(max-width:650px){nav{height:62px;padding:0 16px}.brand{font-size:12px}.badge{font-size:8px}.hero{padding:72px 18px 54px}.hero small{font-size:8px;line-height:1.8}.hero h1{font-size:43px;line-height:1.02;letter-spacing:-.045em;margin:20px 0}.hero h1 span{display:inline-block;margin-top:5px;color:#5ee9ff;-webkit-text-stroke:0;text-shadow:0 0 22px #08bfe755}.hero p{font-size:13px;margin:0 auto;max-width:310px}.query{grid-template-columns:1fr;margin:0 15px 70px;padding:24px 20px;gap:18px}.query h2,.ranking h2{font-size:25px}.query p{font-size:12px}.search{display:grid;grid-template-columns:1fr}.search input,.search button{width:100%;min-height:46px}.search button{margin-top:9px}.result{grid-column:auto;font-size:12px;line-height:1.8}.result strong{display:block;font-size:28px;margin:0 0 6px}.ranking{margin:0 15px 60px;padding:24px 14px}.podium{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:24px 0 18px}.card{padding:16px 5px;min-width:0}.card small{font-size:7px}.card strong{font-size:31px;margin:6px 0}.card h3{font-size:10px;line-height:1.35;min-height:28px;margin:8px 0 5px;overflow-wrap:anywhere}.card span{display:block;font-size:8px}.row{grid-template-columns:38px minmax(0,1fr) auto;gap:8px;padding:15px 12px}.rank-number{font-size:15px}.identity b{font-size:12px}.identity span{font-size:9px;line-height:1.45}.row-score b{font-size:13px}.row-score small{font-size:7px}footer{font-size:8px;padding:25px 12px}}
+    @media(max-width:380px){.hero h1{font-size:38px}.podium{gap:5px}.card strong{font-size:27px}.card{padding:14px 3px}}
+  </style>
+  <link rel="stylesheet" href="theme-v5.css?v=5">
+  <link rel="stylesheet" href="progress-v12.css?v=13">
+</head>
+<body>
+  <nav><div class="brand">OCEAN <b>RANK</b></div><div class="badge">SEMIFINAL LIVE</div></nav>
+  <section class="hero">
+    <small>OCEAN OF US · REMIX CONTEST 2026</small>
+    <h1>让每一份声音<br><span>浮出海面</span></h1>
+    <p>复审阶段已经开始。输入参赛编号，查看你在这场声浪中的当前位置。</p>
+  </section>
+  <section class="query">
+    <div><small>FIND YOUR POSITION</small><h2>查询我的排名</h2><p>请输入报名时获得的参赛编号。晋级选手可查看当前复审评分，未晋级选手可查看初审名次。</p></div>
+    <form class="search" id="searchForm"><input id="participantId" inputmode="numeric" autocomplete="off" placeholder="例如：22"><button type="submit">查询排名</button></form>
+    <div class="result" id="result" aria-live="polite"></div>
+  </section>
+  <section class="ranking">
+    <div class="progress-note"><span class="pulse"></span><b>当前进度</b>：复审共 3 位评委，已收到第 1 位评委评分</div>
+    <div class="ranking-title"><div><small>THE SEMIFINAL LEADERBOARD</small><h2>复审实时排行榜</h2></div><span>1 / 3 JUDGES</span></div>
+    <p class="ranking-help">前 38 位为正式复审选手，按当前复审得分排序；未晋级选手置于榜单后半部分，并按初审最终名次排列。</p>
+    <div class="podium" id="podium"></div>
+    <div id="list"></div>
+  </section>
+  <footer>OCEAN RANK © 2026 · SEMIFINAL EDITION</footer>
+  <script src="rank-data-v13.js?v=13"></script>
+  <script>
+    const esc=value=>String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
+    const semifinalists=contestants.filter(item=>item.status==="semifinal");
+    const eliminated=contestants.filter(item=>item.status==="eliminated");
+    const detailUrl=item=>`detail.html?id=${item.id}&scores=13`;
+
+    document.getElementById("podium").innerHTML=semifinalists.slice(0,3).map(item=>`
+      <a href="${detailUrl(item)}" class="card semifinal-card">
+        <small>SEMIFINAL RANK</small><strong>${String(item.rank).padStart(2,"0")}</strong>
+        <h3>${esc(item.name)}</h3><span>参赛编号 ${item.id}<br>复审序号 ${item.finalSequence} · ${item.total.toFixed(2)} 分</span>
+      </a>`).join("");
+
+    const semifinalRows=semifinalists.slice(3).map(item=>`
+      <a href="${detailUrl(item)}" class="row semifinal-row">
+        <div class="rank-number">${String(item.rank).padStart(2,"0")}</div>
+        <div class="identity"><b>${esc(item.name)}</b><span>参赛编号 ${item.id} · 复审序号 ${item.finalSequence}</span></div>
+        <div class="row-score"><b>${item.total.toFixed(2)}</b><small>当前复审分</small></div>
+      </a>`).join("");
+
+    const eliminatedRows=eliminated.map(item=>`
+      <a href="${detailUrl(item)}" class="row eliminated-row">
+        <div class="rank-number out-mark">OUT</div>
+        <div class="identity"><b>${esc(item.name)}</b><span>参赛编号 ${item.id} · 初审第 ${item.prelimRank} 名</span></div>
+        <div class="row-score eliminated-state"><b>未晋级</b><small>复审</small></div>
+      </a>`).join("");
+
+    document.getElementById("list").innerHTML=semifinalRows+`
+      <div class="eliminated-divider"><span>PRELIMINARY ROUND</span><b>未晋级复审</b><small>以下选手按初审最终名次排列，初审分数不计入复审</small></div>`+eliminatedRows;
+
+    document.getElementById("searchForm").addEventListener("submit",event=>{
+      event.preventDefault();
+      const input=document.getElementById("participantId");
+      const result=document.getElementById("result");
+      const item=contestants.find(entry=>entry.id===Number(input.value));
+      result.style.display="block";
+      if(!item){result.innerHTML=`未找到参赛编号 <b>${esc(input.value||"—")}</b>`;return;}
+      result.classList.toggle("is-eliminated",item.status==="eliminated");
+      result.innerHTML=item.status==="semifinal"
+        ?`<a href="${detailUrl(item)}"><strong>#${item.rank}</strong><b>${esc(item.name)}</b> · 参赛编号 ${item.id} · 复审序号 ${item.finalSequence} · 当前 ${item.total.toFixed(2)} 分<br><small>点击查看各维度评分 →</small></a>`
+        :`<a href="${detailUrl(item)}"><strong>OUT</strong><b>${esc(item.name)}</b> · 参赛编号 ${item.id} · 初审第 ${item.prelimRank} 名 · 未晋级复审<br><small>点击查看状态详情 →</small></a>`;
+    });
+  </script>
+</body>
+</html>
