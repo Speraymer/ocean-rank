@@ -24,7 +24,7 @@
     @media(max-width:380px){.hero h1{font-size:38px}.podium{gap:5px}.card strong{font-size:27px}.card{padding:14px 3px}}
   </style>
   <link rel="stylesheet" href="theme-v5.css?v=5">
-  <link rel="stylesheet" href="progress-v12.css?v=13">
+  <link rel="stylesheet" href="progress-v12.css?v=14">
 </head>
 <body>
   <nav><div class="brand">OCEAN <b>RANK</b></div><div class="badge">SEMIFINAL LIVE</div></nav>
@@ -39,19 +39,19 @@
     <div class="result" id="result" aria-live="polite"></div>
   </section>
   <section class="ranking">
-    <div class="progress-note"><span class="pulse"></span><b>当前进度</b>：复审共 3 位评委，已收到第 1 位评委评分</div>
-    <div class="ranking-title"><div><small>THE SEMIFINAL LEADERBOARD</small><h2>复审实时排行榜</h2></div><span>1 / 3 JUDGES</span></div>
+    <div class="progress-note"><span class="pulse"></span><b>当前进度</b>：复审共 3 位评委，已收到前 2 位评委评分</div>
+    <div class="ranking-title"><div><small>THE SEMIFINAL LEADERBOARD</small><h2>复审实时排行榜</h2></div><span>2 / 3 JUDGES</span></div>
     <p class="ranking-help">前 38 位为正式复审选手，按当前复审得分排序；未晋级选手置于榜单后半部分，并按初审最终名次排列。</p>
     <div class="podium" id="podium"></div>
     <div id="list"></div>
   </section>
   <footer>OCEAN RANK © 2026 · SEMIFINAL EDITION</footer>
-  <script src="rank-data-v13.js?v=13"></script>
+  <script src="rank-data-v14.js?v=14"></script>
   <script>
     const esc=value=>String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
     const semifinalists=contestants.filter(item=>item.status==="semifinal");
     const eliminated=contestants.filter(item=>item.status==="eliminated");
-    const detailUrl=item=>`detail.html?id=${item.id}&scores=13`;
+    const detailUrl=item=>`detail.html?id=${item.id}&scores=14`;
 
     document.getElementById("podium").innerHTML=semifinalists.slice(0,3).map(item=>`
       <a href="${detailUrl(item)}" class="card semifinal-card">
