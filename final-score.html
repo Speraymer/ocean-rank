@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#020a12">
+  <title>终审评分台｜Ocean Rank</title>
+  <style>
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#020a12;color:#eafaff;font-family:Arial,"Microsoft YaHei",sans-serif}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(180deg,#020a1266,#020a12 700px),url("album-cover-v5.jpg") center top/cover no-repeat;opacity:.34}
+    body:after{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(#06314a16 1px,transparent 1px),linear-gradient(90deg,#06314a16 1px,transparent 1px);background-size:50px 50px}
+    button,input,textarea{font:inherit}.wrap{position:relative;z-index:1;width:min(1120px,calc(100% - 30px));margin:auto;padding:28px 0 80px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}.back{color:#6cdaeb;text-decoration:none;font-size:12px}.save-state{font-size:10px;color:#7394a3;letter-spacing:.08em}
+    .hero{margin:28px 0 18px;padding:36px;border:1px solid #7fdfff2b;background:#071724e8;backdrop-filter:blur(14px);box-shadow:0 24px 70px #0008}.eyebrow{font-size:9px;letter-spacing:.2em;color:#57d8ec}.hero h1{margin:12px 0 10px;font-size:clamp(35px,6vw,62px);line-height:1}.hero p{max-width:760px;margin:0;color:#91aab7;font-size:12px;line-height:1.9}.local-note{margin-top:22px;padding:13px 15px;border:1px solid #e5ae5b42;background:#6b471d30;color:#d5b580;font-size:10px;line-height:1.7}
+    .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.summary-card{padding:19px;border:1px solid #7fdfff22;background:#061421df}.summary-card span{display:block;color:#7896a5;font-size:10px}.summary-card strong{display:block;margin-top:8px;font-size:25px}.summary-card.primary strong{color:#52e5fa}.progress-track{height:4px;margin-top:10px;background:#102a38;overflow:hidden}.progress-bar{height:100%;width:0;background:linear-gradient(90deg,#16bfd9,#4df0db);transition:width .2s ease}
+    .formula,.toolbar{border:1px solid #7fdfff22;background:#061421db}.formula{padding:17px 19px;color:#86a4b2;font-size:11px;line-height:1.8}.formula b{color:#d8f9ff}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0 28px;padding:14px}.btn{min-height:40px;padding:0 15px;border:1px solid #36e6ff42;background:#0a2535;color:#b7f5ff;cursor:pointer}.btn:hover{border-color:#36e6ff99;background:#0d3145}.btn.danger{margin-left:auto;border-color:#bd718044;background:#301923;color:#d5a3ae}.file-input{display:none}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:34px 0 15px}.section-head h2{margin:7px 0 0;font-size:26px}.section-head p{margin:0;color:#6f8d9c;font-size:10px;line-height:1.7;text-align:right}
+    .works{display:grid;gap:13px}.work{border:1px solid #7fdfff22;background:#061421ed;overflow:hidden;transition:border-color .2s ease}.work.complete{border-color:#36e6ff4d}.work.invalid{border-color:#d66e7b99}.work-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;padding:18px 20px;border-bottom:1px solid #7fdfff1c;background:linear-gradient(90deg,#0c2a3a8c,transparent)}.sequence{min-width:72px}.sequence small{display:block;font-size:8px;color:#6298aa;letter-spacing:.13em}.sequence strong{display:block;margin-top:5px;color:#58e6f8;font-size:29px;line-height:1}.identity{min-width:0}.identity b{display:block;overflow-wrap:anywhere}.identity span{display:block;margin-top:5px;color:#688898;font-size:9px}.completion{padding:6px 9px;border:1px solid #627f8c55;color:#7895a3;font-size:9px;white-space:nowrap}.complete .completion{border-color:#36e6ff5c;color:#77ebfb;background:#0b65763d}
+    .work-body{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.7fr);gap:20px;padding:20px}.inputs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.field label{display:block;min-height:30px;margin-bottom:7px;color:#88a6b4;font-size:10px;line-height:1.45}.field input{width:100%;height:46px;border:1px solid #6ac7df38;background:#020b12;color:#fff;padding:0 12px;font-size:17px;outline:none}.field input:focus{border-color:#36e6ff}.field input[aria-invalid="true"]{border-color:#d66e7b}.comment-field{grid-column:1/-1}.comment-field label{min-height:auto}.comment-field textarea{width:100%;min-height:76px;resize:vertical;border:1px solid #6ac7df2b;background:#020b12;color:#d8ecf2;padding:12px;outline:none;line-height:1.6}.comment-field textarea:focus{border-color:#36e6ff}
+    .calculation{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start}.calc-item{padding:13px;border:1px solid #7fdfff1d;background:#04101a}.calc-item span{display:block;color:#668594;font-size:9px;line-height:1.4}.calc-item b{display:block;margin-top:7px;font-size:18px}.calc-item.final-judge b{color:#91effb}.calc-item.final-score{border-color:#36e6ff4d;background:#083044}.calc-item.final-score b{color:#fff;font-size:24px}.calc-note{grid-column:1/-1;color:#597786;font-size:8px;line-height:1.6}
+    .sort-panel{margin-top:32px;padding:30px;border:1px solid #36e6ff3d;background:linear-gradient(135deg,#0a3548cc,#061421e8);text-align:center}.sort-panel h2{margin:0 0 10px}.sort-panel p{margin:0 auto 20px;max-width:650px;color:#8aa5b2;font-size:11px;line-height:1.8}.sort-button{min-width:min(360px,100%);min-height:54px;border:0;background:linear-gradient(135deg,#11c8df,#275ad1);color:#fff;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 10px 35px #08758f42}.sort-button:hover{filter:brightness(1.08)}
+    .ranking{margin-top:28px;padding:30px;border:1px solid #7fdfff2b;background:#071724ed}.ranking[hidden]{display:none}.ranking-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:20px}.ranking-head h2{margin:7px 0 0;font-size:29px}.ranking-head span{color:#78a0af;font-size:9px}.rank-list{display:grid;gap:8px}.rank-row{display:grid;grid-template-columns:52px minmax(0,1fr) repeat(4,100px);gap:10px;align-items:center;padding:14px 16px;border:1px solid #7fdfff1d;background:#061421}.rank-row.top{border-color:#36e6ff55;background:linear-gradient(90deg,#0b3548,#061421)}.rank-no{font-size:20px;color:#69dff0;font-weight:700}.rank-name b{display:block;overflow-wrap:anywhere}.rank-name span{display:block;margin-top:4px;color:#6f8d9b;font-size:9px}.rank-metric{text-align:right}.rank-metric span{display:block;color:#668493;font-size:8px}.rank-metric b{display:block;margin-top:4px;font-size:13px}.rank-metric.final b{color:#9ef2fd;font-size:17px}
+    @media(max-width:850px){.summary{grid-template-columns:1fr 1fr}.work-body{grid-template-columns:1fr}.rank-row{grid-template-columns:44px minmax(0,1fr) 84px 84px}.rank-row .hide-tablet{display:none}}
+    @media(max-width:600px){.wrap{width:min(100% - 20px,1120px);padding-top:18px}.hero{padding:25px 19px;margin-top:20px}.hero h1{font-size:36px}.summary{gap:7px}.summary-card{padding:14px 12px}.summary-card strong{font-size:20px}.toolbar{padding:10px;gap:7px}.btn{padding:0 10px;font-size:10px}.btn.danger{margin-left:0}.section-head{display:block}.section-head p{margin-top:8px;text-align:left}.work-head{grid-template-columns:auto minmax(0,1fr);gap:12px;padding:15px 13px}.completion{grid-column:1/-1;width:max-content}.sequence{min-width:58px}.sequence strong{font-size:24px}.identity b{font-size:12px}.work-body{padding:14px;gap:14px}.inputs{grid-template-columns:1fr 1fr;gap:9px}.field label{font-size:9px}.field input{height:44px}.calculation{grid-template-columns:1fr 1fr}.sort-panel{padding:24px 15px}.ranking{padding:22px 12px}.ranking-head{display:block}.ranking-head>span{display:block;margin-top:9px}.rank-row{grid-template-columns:35px minmax(0,1fr) 72px;padding:12px 9px;gap:7px}.rank-row .hide-mobile{display:none}.rank-no{font-size:16px}.rank-name b{font-size:11px}.rank-metric.final b{font-size:14px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar"><a class="back" href="./">← 返回公开排行榜</a><span class="save-state" id="saveState">尚未录入</span></div>
+    <section class="hero">
+      <div class="eyebrow">OCEAN OF US · FINAL JUDGING CONSOLE</div>
+      <h1>终审评分台</h1>
+      <p>27 份作品沿用复审序号。页面会自动计算终审评委总分，并按照复审评委 1 × 30%、复审评委 2 × 30%、终审评委 × 40% 得出最终成绩。</p>
+      <div class="local-note"><b>单机模式：</b>本页录入内容只保存在当前电脑的当前浏览器中，不会直接修改公开排行榜。直播前请不要清理浏览器数据，并建议每完成一部分就导出一次 JSON 备份。</div>
+    </section>
+
+    <section class="summary">
+      <article class="summary-card primary"><span>评分进度</span><strong id="progressText">0 / 27</strong><div class="progress-track"><div class="progress-bar" id="progressBar"></div></div></article>
+      <article class="summary-card"><span>已完成作品</span><strong id="completeCount">0</strong></article>
+      <article class="summary-card"><span>待填写作品</span><strong id="pendingCount">27</strong></article>
+      <article class="summary-card"><span>保存方式</span><strong>本机自动</strong></article>
+    </section>
+
+    <div class="formula"><b>终审评委总分</b> = 编曲创意度 × 25% + 结构完整度 × 15% + 作曲音乐性 × 25% + 混母制作质量 × 35%<br><b>最终得分</b> = 复审评委 1 总分 × 30% + 复审评委 2 总分 × 30% + 终审评委总分 × 40%</div>
+    <div class="toolbar">
+      <button class="btn" id="exportJson" type="button">导出 JSON 备份</button>
+      <button class="btn" id="importJson" type="button">导入 JSON 备份</button>
+      <button class="btn" id="exportCsv" type="button">导出成绩 CSV</button>
+      <input class="file-input" id="importFile" type="file" accept="application/json,.json">
+      <button class="btn danger" id="clearAll" type="button">清空全部录入</button>
+    </div>
+
+    <div class="section-head"><div><div class="eyebrow">27 FINAL WORKS</div><h2>终审评分栏</h2></div><p>分数范围为 0–100；四项全部填写后，该作品才会标记为完成。</p></div>
+    <section class="works" id="works"></section>
+
+    <section class="sort-panel">
+      <h2>所有评分填写完成了吗？</h2>
+      <p>系统会先检查 27 份作品是否全部填写，然后按照最终得分从高到低生成终审排名。若最终得分完全相同，则依次比较终审总分、复审平均分和复审序号。</p>
+      <button class="sort-button" id="sortButton" type="button">立刻排序并生成最终排名</button>
+    </section>
+
+    <section class="ranking" id="ranking" hidden>
+      <div class="ranking-head"><div><div class="eyebrow">FINAL RESULT</div><h2>终审最终排名</h2></div><span id="rankTime"></span></div>
+      <div class="rank-list" id="rankList"></div>
+    </section>
+  </main>
+
+  <script src="final-score-data-v1.js?v=1"></script>
+  <script>
+    const STORAGE_KEY="ocean-final-scoring-v1";
+    const fields=["creativity","structure","musicality","production"];
+    const labels={creativity:"编曲创意度 · 25%",structure:"结构完整度 · 15%",musicality:"作曲音乐性 · 25%",production:"混母制作质量 · 35%"};
+    const weights={creativity:.25,structure:.15,musicality:.25,production:.35};
+    const esc=value=>String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
+    const blankEntry=()=>({creativity:"",structure:"",musicality:"",production:"",comment:""});
+
+    function loadState(){
+      try{
+        const parsed=JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if(parsed&&parsed.entries) return parsed;
+      }catch(error){}
+      return {version:1,entries:{},savedAt:null};
+    }
+
+    let state=loadState();
+    let rankingCache=null;
+
+    function entryFor(sequence){
+      if(!state.entries[sequence]) state.entries[sequence]=blankEntry();
+      return state.entries[sequence];
+    }
+
+    function calculate(work,entry){
+      const numbers={};
+      let complete=true;
+      let invalid=false;
+      for(const field of fields){
+        const raw=entry[field];
+        const value=Number(raw);
+        if(raw===""||!Number.isFinite(value)) complete=false;
+        if(raw!==""&&(!Number.isFinite(value)||value<0||value>100)) invalid=true;
+        numbers[field]=value;
+      }
+      complete=complete&&!invalid;
+      const finalJudgeTotal=complete?fields.reduce((sum,field)=>sum+numbers[field]*weights[field],0):null;
+      const finalScore=complete?work.semifinalJudge1*.30+work.semifinalJudge2*.30+finalJudgeTotal*.40:null;
+      return {complete,invalid,finalJudgeTotal,finalScore};
+    }
+
+    function saveState(){
+      state.savedAt=new Date().toISOString();
+      localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+      document.getElementById("saveState").textContent=`已自动保存 · ${new Date(state.savedAt).toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit",second:"2-digit"})}`;
+    }
+
+    function renderWorks(){
+      document.getElementById("works").innerHTML=finalWorks.map(work=>{
+        const entry=entryFor(work.sequence);
+        return `<article class="work" data-sequence="${work.sequence}">
+          <div class="work-head">
+            <div class="sequence"><small>复审序号</small><strong>${String(work.sequence).padStart(2,"0")}</strong></div>
+            <div class="identity"><b>${esc(work.name)}</b><span>参赛编号 ${work.participantId} · 复审最终第 ${work.semifinalRank} 名</span></div>
+            <div class="completion">待填写</div>
+          </div>
+          <div class="work-body">
+            <div class="inputs">
+              ${fields.map(field=>`<div class="field"><label for="${field}-${work.sequence}">${labels[field]}</label><input id="${field}-${work.sequence}" data-field="${field}" type="number" min="0" max="100" step="0.01" inputmode="decimal" autocomplete="off" value="${esc(entry[field])}" aria-label="复审序号 ${work.sequence} ${labels[field]}"></div>`).join("")}
+              <div class="field comment-field"><label for="comment-${work.sequence}">终审评语（选填）</label><textarea id="comment-${work.sequence}" data-field="comment" placeholder="可填写终审评委的文字评价">${esc(entry.comment||"")}</textarea></div>
+            </div>
+            <div class="calculation">
+              <div class="calc-item"><span>复审评委 1 · 30%</span><b>${work.semifinalJudge1.toFixed(2)}</b></div>
+              <div class="calc-item"><span>复审评委 2 · 30%</span><b>${work.semifinalJudge2.toFixed(2)}</b></div>
+              <div class="calc-item final-judge"><span>终审评委总分 · 40%</span><b data-output="finalJudge">—</b></div>
+              <div class="calc-item final-score"><span>加权最终得分</span><b data-output="finalScore">—</b></div>
+              <div class="calc-note">复审平均分 ${work.semifinalAverage.toFixed(2)} · 页面按两位复审评委原始总分分别计入 30%</div>
+            </div>
+          </div>
+        </article>`;
+      }).join("");
+    }
+
+    function updateCard(work){
+      const card=document.querySelector(`[data-sequence="${work.sequence}"]`);
+      const entry=entryFor(work.sequence);
+      const result=calculate(work,entry);
+      card.classList.toggle("complete",result.complete);
+      card.classList.toggle("invalid",result.invalid);
+      card.querySelector(".completion").textContent=result.invalid?"分数有误":result.complete?"已完成":"待填写";
+      card.querySelector('[data-output="finalJudge"]').textContent=result.complete?result.finalJudgeTotal.toFixed(2):"—";
+      card.querySelector('[data-output="finalScore"]').textContent=result.complete?result.finalScore.toFixed(2):"—";
+      fields.forEach(field=>{
+        const input=card.querySelector(`[data-field="${field}"]`);
+        const value=Number(entry[field]);
+        input.setAttribute("aria-invalid",entry[field]!==""&&(!Number.isFinite(value)||value<0||value>100)?"true":"false");
+      });
+      return result;
+    }
+
+    function updateSummary(){
+      const completed=finalWorks.filter(work=>calculate(work,entryFor(work.sequence)).complete).length;
+      document.getElementById("progressText").textContent=`${completed} / ${finalWorks.length}`;
+      document.getElementById("completeCount").textContent=completed;
+      document.getElementById("pendingCount").textContent=finalWorks.length-completed;
+      document.getElementById("progressBar").style.width=`${completed/finalWorks.length*100}%`;
+    }
+
+    function invalidateRanking(){
+      rankingCache=null;
+      document.getElementById("ranking").hidden=true;
+    }
+
+    function rankResults(){
+      const unfinished=finalWorks.filter(work=>!calculate(work,entryFor(work.sequence)).complete);
+      if(unfinished.length){
+        const first=unfinished[0];
+        alert(`还有 ${unfinished.length} 份作品尚未完整填写。请先检查复审序号 ${first.sequence}。`);
+        const card=document.querySelector(`[data-sequence="${first.sequence}"]`);
+        card.scrollIntoView({behavior:"smooth",block:"center"});
+        card.querySelector("input").focus({preventScroll:true});
+        return;
+      }
+      rankingCache=finalWorks.map(work=>({...work,...calculate(work,entryFor(work.sequence)),entry:entryFor(work.sequence)})).sort((a,b)=>
+        b.finalScore-a.finalScore||b.finalJudgeTotal-a.finalJudgeTotal||b.semifinalAverage-a.semifinalAverage||a.sequence-b.sequence
+      );
+      const list=document.getElementById("rankList");
+      list.innerHTML=rankingCache.map((item,index)=>`<article class="rank-row ${index<3?"top":""}">
+        <div class="rank-no">${String(index+1).padStart(2,"0")}</div>
+        <div class="rank-name"><b>${esc(item.name)}</b><span>复审序号 ${item.sequence} · 参赛编号 ${item.participantId}</span></div>
+        <div class="rank-metric hide-mobile"><span>复审评委 1</span><b>${item.semifinalJudge1.toFixed(2)}</b></div>
+        <div class="rank-metric hide-tablet"><span>复审评委 2</span><b>${item.semifinalJudge2.toFixed(2)}</b></div>
+        <div class="rank-metric hide-tablet"><span>终审总分</span><b>${item.finalJudgeTotal.toFixed(2)}</b></div>
+        <div class="rank-metric final"><span>最终得分</span><b>${item.finalScore.toFixed(2)}</b></div>
+      </article>`).join("");
+      const ranking=document.getElementById("ranking");
+      ranking.hidden=false;
+      document.getElementById("rankTime").textContent=`生成时间 ${new Date().toLocaleString("zh-CN")}`;
+      ranking.scrollIntoView({behavior:"smooth",block:"start"});
+    }
+
+    function download(name,type,content){
+      const blob=new Blob([content],{type});
+      const url=URL.createObjectURL(blob);
+      const link=document.createElement("a");
+      link.href=url;link.download=name;link.click();
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+    }
+
+    function csvCell(value){
+      return `"${String(value??"").replace(/"/g,'""')}"`;
+    }
+
+    function exportCsv(){
+      const allComplete=finalWorks.every(work=>calculate(work,entryFor(work.sequence)).complete);
+      const ranked=allComplete?[...finalWorks].map(work=>({...work,...calculate(work,entryFor(work.sequence))})).sort((a,b)=>b.finalScore-a.finalScore||b.finalJudgeTotal-a.finalJudgeTotal||b.semifinalAverage-a.semifinalAverage||a.sequence-b.sequence):[];
+      const rankMap=new Map(ranked.map((item,index)=>[item.sequence,index+1]));
+      const rows=[["最终排名","复审序号","参赛编号","制作人","复审评委1总分","复审评委2总分","编曲创意度","结构完整度","作曲音乐性","混母制作质量","终审评委总分","最终得分","终审评语"]];
+      for(const work of finalWorks){
+        const entry=entryFor(work.sequence);const result=calculate(work,entry);
+        rows.push([rankMap.get(work.sequence)||"",work.sequence,work.participantId,work.name,work.semifinalJudge1,work.semifinalJudge2,entry.creativity,entry.structure,entry.musicality,entry.production,result.finalJudgeTotal?.toFixed(2)||"",result.finalScore?.toFixed(2)||"",entry.comment||""]);
+      }
+      download(`Ocean终审成绩_${new Date().toISOString().slice(0,10)}.csv`,"text/csv;charset=utf-8","\ufeff"+rows.map(row=>row.map(csvCell).join(",")).join("\r\n"));
+    }
+
+    renderWorks();
+    finalWorks.forEach(updateCard);
+    updateSummary();
+    if(state.savedAt) document.getElementById("saveState").textContent=`已恢复本机记录 · ${new Date(state.savedAt).toLocaleString("zh-CN")}`;
+
+    document.getElementById("works").addEventListener("input",event=>{
+      const control=event.target.closest("[data-field]");
+      if(!control)return;
+      const card=control.closest(".work");
+      const sequence=Number(card.dataset.sequence);
+      entryFor(sequence)[control.dataset.field]=control.value;
+      saveState();
+      updateCard(finalWorks.find(work=>work.sequence===sequence));
+      updateSummary();
+      invalidateRanking();
+    });
+
+    document.getElementById("sortButton").addEventListener("click",rankResults);
+    document.getElementById("exportCsv").addEventListener("click",exportCsv);
+    document.getElementById("exportJson").addEventListener("click",()=>download(`Ocean终审备份_${new Date().toISOString().replace(/[:.]/g,"-")}.json`,"application/json;charset=utf-8",JSON.stringify({version:1,exportedAt:new Date().toISOString(),entries:state.entries},null,2)));
+    document.getElementById("importJson").addEventListener("click",()=>document.getElementById("importFile").click());
+    document.getElementById("importFile").addEventListener("change",async event=>{
+      const file=event.target.files[0];if(!file)return;
+      try{
+        const parsed=JSON.parse(await file.text());
+        if(!parsed.entries||typeof parsed.entries!=="object")throw new Error("invalid backup");
+        const restored={};
+        finalWorks.forEach(work=>{
+          const source=parsed.entries[work.sequence]||{};
+          restored[work.sequence]={...blankEntry(),...Object.fromEntries([...fields,"comment"].map(field=>[field,String(source[field]??"")]))};
+        });
+        state={version:1,entries:restored,savedAt:null};saveState();
+        renderWorks();finalWorks.forEach(updateCard);updateSummary();invalidateRanking();
+        alert("备份已成功导入。");
+      }catch(error){alert("无法导入：这不是有效的终审评分备份文件。");}
+      event.target.value="";
+    });
+    document.getElementById("clearAll").addEventListener("click",()=>{
+      if(!confirm("确定清空当前浏览器中全部 27 份终审评分吗？此操作无法撤销，建议先导出 JSON 备份。"))return;
+      state={version:1,entries:{},savedAt:null};localStorage.removeItem(STORAGE_KEY);renderWorks();finalWorks.forEach(updateCard);updateSummary();invalidateRanking();document.getElementById("saveState").textContent="已清空全部录入";
+    });
+    window.addEventListener("storage",event=>{
+      if(event.key!==STORAGE_KEY)return;
+      state=loadState();renderWorks();finalWorks.forEach(updateCard);updateSummary();invalidateRanking();
+    });
+  </script>
+</body>
+</html>
