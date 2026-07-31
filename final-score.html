@@ -12,7 +12,7 @@
     body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(180deg,#020a1266,#020a12 700px),url("album-cover-v5.jpg") center top/cover no-repeat;opacity:.34}
     body:after{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(#06314a16 1px,transparent 1px),linear-gradient(90deg,#06314a16 1px,transparent 1px);background-size:50px 50px}
     button,input,textarea{font:inherit}.wrap{position:relative;z-index:1;width:min(1120px,calc(100% - 30px));margin:auto;padding:28px 0 80px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}.back{color:#6cdaeb;text-decoration:none;font-size:12px}.save-state{font-size:10px;color:#7394a3;letter-spacing:.08em}
-    .hero{margin:28px 0 18px;padding:36px;border:1px solid #7fdfff2b;background:#071724e8;backdrop-filter:blur(14px);box-shadow:0 24px 70px #0008}.eyebrow{font-size:9px;letter-spacing:.2em;color:#57d8ec}.hero h1{margin:12px 0 10px;font-size:clamp(35px,6vw,62px);line-height:1}.hero p{max-width:760px;margin:0;color:#91aab7;font-size:12px;line-height:1.9}.local-note{margin-top:22px;padding:13px 15px;border:1px solid #e5ae5b42;background:#6b471d30;color:#d5b580;font-size:10px;line-height:1.7}
+    .hero{margin:28px 0 18px;padding:36px;border:1px solid #7fdfff2b;background:#071724e8;backdrop-filter:blur(14px);box-shadow:0 24px 70px #0008}.eyebrow{font-size:9px;letter-spacing:.2em;color:#57d8ec}.hero h1{margin:12px 0 10px;font-size:clamp(35px,6vw,62px);line-height:1}.hero p{max-width:760px;margin:0;color:#91aab7;font-size:12px;line-height:1.9}
     .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.summary-card{padding:19px;border:1px solid #7fdfff22;background:#061421df}.summary-card span{display:block;color:#7896a5;font-size:10px}.summary-card strong{display:block;margin-top:8px;font-size:25px}.summary-card.primary strong{color:#52e5fa}.progress-track{height:4px;margin-top:10px;background:#102a38;overflow:hidden}.progress-bar{height:100%;width:0;background:linear-gradient(90deg,#16bfd9,#4df0db);transition:width .2s ease}
     .formula,.toolbar{border:1px solid #7fdfff22;background:#061421db}.formula{padding:17px 19px;color:#86a4b2;font-size:11px;line-height:1.8}.formula b{color:#d8f9ff}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0 28px;padding:14px}.btn{min-height:40px;padding:0 15px;border:1px solid #36e6ff42;background:#0a2535;color:#b7f5ff;cursor:pointer}.btn:hover{border-color:#36e6ff99;background:#0d3145}.btn.danger{margin-left:auto;border-color:#bd718044;background:#301923;color:#d5a3ae}.file-input{display:none}
     .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:34px 0 15px}.section-head h2{margin:7px 0 0;font-size:26px}.section-head p{margin:0;color:#6f8d9c;font-size:10px;line-height:1.7;text-align:right}
@@ -32,7 +32,6 @@
       <div class="eyebrow">OCEAN OF US · FINAL JUDGING CONSOLE</div>
       <h1>终审评分台</h1>
       <p>27 份作品沿用复审序号。页面会自动计算终审评委总分，并按照复审评委 1 × 30%、复审评委 2 × 30%、终审评委 × 40% 得出最终成绩。</p>
-      <div class="local-note"><b>单机模式：</b>本页录入内容只保存在当前电脑的当前浏览器中，不会直接修改公开排行榜。直播前请不要清理浏览器数据，并建议每完成一部分就导出一次 JSON 备份。</div>
     </section>
 
     <section class="summary">
@@ -120,7 +119,7 @@
         return `<article class="work" data-sequence="${work.sequence}">
           <div class="work-head">
             <div class="sequence"><small>复审序号</small><strong>${String(work.sequence).padStart(2,"0")}</strong></div>
-            <div class="identity"><b>${esc(work.name)}</b><span>参赛编号 ${work.participantId} · 复审最终第 ${work.semifinalRank} 名</span></div>
+            <div class="identity"><b>匿名终审作品</b><span>仅以复审序号进行识别</span></div>
             <div class="completion">待填写</div>
           </div>
           <div class="work-body">
@@ -186,7 +185,7 @@
       const list=document.getElementById("rankList");
       list.innerHTML=rankingCache.map((item,index)=>`<article class="rank-row ${index<3?"top":""}">
         <div class="rank-no">${String(index+1).padStart(2,"0")}</div>
-        <div class="rank-name"><b>${esc(item.name)}</b><span>复审序号 ${item.sequence} · 参赛编号 ${item.participantId}</span></div>
+        <div class="rank-name"><b>复审序号 ${String(item.sequence).padStart(2,"0")}</b><span>匿名终审作品</span></div>
         <div class="rank-metric hide-mobile"><span>复审评委 1</span><b>${item.semifinalJudge1.toFixed(2)}</b></div>
         <div class="rank-metric hide-tablet"><span>复审评委 2</span><b>${item.semifinalJudge2.toFixed(2)}</b></div>
         <div class="rank-metric hide-tablet"><span>终审总分</span><b>${item.finalJudgeTotal.toFixed(2)}</b></div>
@@ -214,10 +213,10 @@
       const allComplete=finalWorks.every(work=>calculate(work,entryFor(work.sequence)).complete);
       const ranked=allComplete?[...finalWorks].map(work=>({...work,...calculate(work,entryFor(work.sequence))})).sort((a,b)=>b.finalScore-a.finalScore||b.finalJudgeTotal-a.finalJudgeTotal||b.semifinalAverage-a.semifinalAverage||a.sequence-b.sequence):[];
       const rankMap=new Map(ranked.map((item,index)=>[item.sequence,index+1]));
-      const rows=[["最终排名","复审序号","参赛编号","制作人","复审评委1总分","复审评委2总分","编曲创意度","结构完整度","作曲音乐性","混母制作质量","终审评委总分","最终得分","终审评语"]];
+      const rows=[["最终排名","复审序号","复审评委1总分","复审评委2总分","编曲创意度","结构完整度","作曲音乐性","混母制作质量","终审评委总分","最终得分","终审评语"]];
       for(const work of finalWorks){
         const entry=entryFor(work.sequence);const result=calculate(work,entry);
-        rows.push([rankMap.get(work.sequence)||"",work.sequence,work.participantId,work.name,work.semifinalJudge1,work.semifinalJudge2,entry.creativity,entry.structure,entry.musicality,entry.production,result.finalJudgeTotal?.toFixed(2)||"",result.finalScore?.toFixed(2)||"",entry.comment||""]);
+        rows.push([rankMap.get(work.sequence)||"",work.sequence,work.semifinalJudge1,work.semifinalJudge2,entry.creativity,entry.structure,entry.musicality,entry.production,result.finalJudgeTotal?.toFixed(2)||"",result.finalScore?.toFixed(2)||"",entry.comment||""]);
       }
       download(`Ocean终审成绩_${new Date().toISOString().slice(0,10)}.csv`,"text/csv;charset=utf-8","\ufeff"+rows.map(row=>row.map(csvCell).join(",")).join("\r\n"));
     }
