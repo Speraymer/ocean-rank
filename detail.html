@@ -4,18 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#020a12">
-  <title>复审评分详情｜Ocean Rank</title>
+  <title>评审详情｜Ocean Rank</title>
   <style>
     *{box-sizing:border-box}
-    body{margin:0;min-height:100vh;background:radial-gradient(circle at 75% 15%,#07527a55,transparent 30%),linear-gradient(160deg,#020a12,#031521 70%,#020a12);color:#eafaff;font-family:Arial,"Microsoft YaHei",sans-serif}
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(#06314a14 1px,transparent 1px),linear-gradient(90deg,#06314a14 1px,transparent 1px);background-size:50px 50px}
-    .wrap{position:relative;width:min(760px,calc(100% - 30px));margin:auto;padding:35px 0 60px}.back{color:#6cdaeb;text-decoration:none;font-size:12px}
-    .head{margin:35px 0 18px;padding:35px;border:1px solid #7fdfff22;background:#071724e8;box-shadow:0 24px 70px #0008}.eyebrow{font-size:9px;letter-spacing:.2em;color:#57d8ec}.head h1{font-size:38px;margin:12px 0 5px;overflow-wrap:anywhere}.meta{color:#7994a4;font-size:12px;line-height:1.8}.rank{display:flex;justify-content:space-between;align-items:end;margin-top:28px}.rank strong{display:block;font-size:64px;color:#36e6ff;line-height:.9}.total{text-align:right}.total b{display:block;font-size:32px}.total small,.rank small{color:#7994a4}
-    .progress{margin:0 0 18px;padding:14px 18px;border:1px solid #36e6ff33;background:#0b33434d;color:#92eefa;font-size:11px;line-height:1.7}.progress b{color:white}
-    .scores{display:grid;grid-template-columns:1fr 1fr;gap:12px}.score{border:1px solid #7fdfff22;background:#061421;padding:22px}.score span{font-size:12px;color:#8ba5b3}.score strong{display:block;font-size:32px;margin:10px 0}.score small{color:#58cfe2}
-    .formula,.comment,.status-card{margin-top:18px;border:1px solid #36e6ff22;padding:18px;color:#7895a5;font-size:11px;line-height:1.8;background:#061421aa}.comment{white-space:pre-line}.comment b{display:block;margin-bottom:8px;color:#a9eaf4;font-size:12px}.status-card{padding:28px;border-color:#b4778444;background:#2b1720aa;color:#caaeb4}.status-card h2{margin:0 0 12px;color:#e2bbc3;font-size:23px}.status-card strong{color:#fff}.status-card p{margin:8px 0 0}
-    body.eliminated .head{border-color:#b4778438;background:#21141be8}body.eliminated .eyebrow,body.eliminated .rank strong{color:#c98e9a}body.eliminated .progress{display:none}
-    @media(max-width:560px){.wrap{padding-top:24px}.head{padding:25px 20px;margin-top:24px}.head h1{font-size:28px}.rank strong{font-size:50px}.scores{grid-template-columns:1fr}.meta{font-size:11px}.total b{font-size:26px}}
+    body{margin:0;min-height:100vh;background:#020a12;color:#eafaff;font-family:Arial,"Microsoft YaHei",sans-serif}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(180deg,#020a1255,#020a12 600px),url("album-cover-v5.jpg") center top/cover no-repeat;opacity:.35}
+    body:after{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(#06314a14 1px,transparent 1px),linear-gradient(90deg,#06314a14 1px,transparent 1px);background-size:50px 50px}
+    .wrap{position:relative;z-index:1;width:min(820px,calc(100% - 30px));margin:auto;padding:35px 0 70px}.back{display:inline-block;color:#6cdaeb;text-decoration:none;font-size:12px}
+    .head{margin:35px 0 18px;padding:35px;border:1px solid #7fdfff30;background:#071724e8;box-shadow:0 24px 70px #0008;backdrop-filter:blur(12px)}.eyebrow{font-size:9px;letter-spacing:.2em;color:#57d8ec}.head h1{font-size:38px;margin:12px 0 5px;overflow-wrap:anywhere}.meta{color:#89a5b4;font-size:12px;line-height:1.8}.rank{display:flex;justify-content:space-between;align-items:end;margin-top:28px}.rank strong{display:block;font-size:64px;color:#36e6ff;line-height:.9}.total{text-align:right}.total b{display:block;font-size:32px}.total small,.rank small{color:#7994a4}
+    .status-line{margin:0 0 18px;padding:14px 18px;border:1px solid #36e6ff42;background:#0b33434d;color:#92eefa;font-size:11px;line-height:1.7}.status-line b{color:white}
+    .scores{display:grid;grid-template-columns:1fr 1fr;gap:12px}.score{border:1px solid #7fdfff22;background:#061421e8;padding:22px}.score span{font-size:12px;color:#8ba5b3}.score strong{display:block;font-size:32px;margin:10px 0}.score small{color:#58cfe2}.formula{margin-top:18px;border:1px solid #36e6ff22;padding:18px;color:#7895a5;font-size:11px;line-height:1.8;background:#061421d9}
+    .status-card{margin-top:18px;border:1px solid;padding:28px;font-size:11px;line-height:1.8}.status-card h2{margin:0 0 12px;font-size:23px}.status-card strong{color:#fff}.status-card p{margin:8px 0 0}
+    .reviews{margin-top:36px}.reviews-head{margin-bottom:18px}.reviews-head h2{margin:8px 0 10px;font-size:28px}.reviews-head p{margin:0;color:#7d99a8;font-size:11px;line-height:1.8}.review-grid{display:grid;gap:12px}.review{position:relative;padding:22px;border:1px solid #7fdfff22;background:#061421e8;overflow:hidden}.review:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,#36e6ff0b,transparent 50%);pointer-events:none}.review-top{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.review-title{font-size:13px;color:#b9f5ff}.stage{padding:5px 7px;border:1px solid #36e6ff38;color:#68d8e9;font-size:8px;letter-spacing:.12em;white-space:nowrap}.review p{position:relative;margin:0;color:#bdd0d8;font-size:12px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere}.review.empty p,.review.not-applicable p{color:#617c89;font-style:italic}.review.trial{border-style:dashed}.review.trial .stage{color:#bca57d;border-color:#bca57d55}.trial-note{position:relative;margin-top:11px;color:#8b7960;font-size:9px;line-height:1.6}
+    body.semifinal-out .head{border-color:#dc9d5145;background:#211b13e8}body.semifinal-out .eyebrow,body.semifinal-out .rank strong{color:#e0a95f}body.semifinal-out .status-line{border-color:#dc9d5145;background:#5b3e2038;color:#e2ba87}body.semifinal-out .status-card{border-color:#dc9d5144;background:#2b2116cc;color:#cbb08f}body.semifinal-out .status-card h2{color:#efbf85}
+    body.prelim-out .head{border-color:#b477843d;background:#21141be8}body.prelim-out .eyebrow,body.prelim-out .rank strong{color:#c98e9a}body.prelim-out .status-card{border-color:#b4778444;background:#2b1720cc;color:#caaeb4}body.prelim-out .status-card h2{color:#e2bbc3}
+    @media(max-width:560px){.wrap{padding-top:24px}.head{padding:25px 20px;margin-top:24px}.head h1{font-size:28px}.rank strong{font-size:50px}.scores{grid-template-columns:1fr}.meta{font-size:11px}.total b{font-size:26px}.review{padding:18px 16px}.review-top{align-items:flex-start}.review-title{font-size:12px}.reviews-head h2{font-size:24px}}
   </style>
 </head>
 <body>
@@ -23,60 +26,86 @@
     <a class="back" href="./">← 返回排行榜</a>
     <section class="head" id="profile">
       <div class="eyebrow" id="eyebrow">SEMIFINAL SCORE REPORT</div>
-      <h1 id="personName">评分详情</h1>
+      <h1 id="personName">评审详情</h1>
       <div class="meta" id="meta"></div>
       <div class="rank">
-        <div><small id="rankLabel">复审暂列</small><strong id="personRank"></strong></div>
-        <div class="total" id="totalBox"><small>当前复审得分</small><b id="total">0.00</b></div>
+        <div><small id="rankLabel">复审最终排名</small><strong id="personRank"></strong></div>
+        <div class="total" id="totalBox"><small>复审最终得分</small><b id="total">0.00</b></div>
       </div>
     </section>
-    <div class="progress" id="progress"><b>复审进度 2 / 3</b> · 当前成绩为前 2 位评委的平均分，最后一位评委成绩录入后会继续更新。</div>
+    <div class="status-line" id="statusLine"></div>
     <section class="scores" id="scores"></section>
-    <div class="comment" id="comment" hidden></div>
-    <div class="formula" id="formula">当前复审得分 = 编曲创意度 × 25% + 结构完整度 × 15% + 作曲音乐性 × 25% + 混母制作质量 × 35%</div>
+    <div class="formula" id="formula">复审得分 = 编曲创意度 × 25% + 结构完整度 × 15% + 作曲音乐性 × 25% + 混母制作质量 × 35%；页面显示两位复审评委的平均成绩。</div>
     <div class="status-card" id="statusCard" hidden></div>
+    <section class="reviews" id="reviewsSection" hidden>
+      <div class="reviews-head"><small>ALL JUDGES' NOTES</small><h2>五位评委的文字评价</h2><p>以下内容依次列出三位初审评委与两位复审评委的原始文字评价；未填写的项目会明确标注。</p></div>
+      <div class="review-grid" id="reviewGrid"></div>
+    </section>
   </main>
-  <script src="data.js?v=14"></script>
+  <script src="data.js?v=15"></script>
   <script>
     const id=Number(new URLSearchParams(location.search).get("id"));
     const item=contestants.find(entry=>entry.id===id);
     const esc=value=>String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
+    const number=value=>Number(value).toFixed(2);
+
+    function renderReviews(reviews){
+      const section=document.getElementById("reviewsSection");
+      const grid=document.getElementById("reviewGrid");
+      section.hidden=false;
+      grid.innerHTML=reviews.map(review=>{
+        let text=review.comment;
+        if(review.state==="not_applicable") text="该作品未进入复审，本轮无评语。";
+        else if(!text) text="该评委未填写文字评语。";
+        const stage=review.stage==="preliminary"?"初审":"复审";
+        const trial=review.state==="trial"?"<div class='trial-note'>本条为额外试评内容，不计入参赛排名或复审成绩。</div>":"";
+        return `<article class="review ${review.state}"><div class="review-top"><b class="review-title">${esc(review.title)}</b><span class="stage">${stage}</span></div><p>${esc(text)}</p>${trial}</article>`;
+      }).join("");
+    }
+
     if(!item){
       document.getElementById("profile").innerHTML="<h1>未找到该参赛者</h1><p class='meta'>请返回排行榜重新输入参赛编号。</p>";
-      document.getElementById("progress").hidden=true;
+      document.getElementById("statusLine").hidden=true;
       document.getElementById("formula").hidden=true;
-    }else if(item.status==="semifinal"){
-      document.title=`${item.name}｜复审评分详情`;
-      document.getElementById("personName").textContent=item.name;
-      document.getElementById("meta").textContent=`参赛编号 ${item.id} · 复审序号 ${item.finalSequence} · 初审第 ${item.prelimRank} 名`;
-      document.getElementById("personRank").textContent=`#${item.rank}`;
-      document.getElementById("total").textContent=item.total.toFixed(2);
-      const dimensions=[
-        ["编曲创意度","creativity","25%"],
-        ["结构完整度","structure","15%"],
-        ["作曲音乐性","musicality","25%"],
-        ["混母制作质量","production","35%"],
-      ];
-      document.getElementById("scores").innerHTML=dimensions.map(([name,key,weight])=>`<article class="score"><span>${name}</span><strong>${item[key].toFixed(2)}</strong><small>权重 ${weight}</small></article>`).join("");
-      if(item.comment){
-        const box=document.getElementById("comment");
-        box.hidden=false;
-        box.innerHTML=`<b>评委评价</b>${esc(item.comment)}`;
-      }
     }else{
-      document.body.classList.add("eliminated");
-      document.title=`${item.name}｜初审结果`;
-      document.getElementById("eyebrow").textContent="PRELIMINARY ROUND RESULT";
+      document.title=`${item.name}｜评审详情`;
       document.getElementById("personName").textContent=item.name;
-      document.getElementById("meta").textContent=`参赛编号 ${item.id} · 初审序号 ${item.sequence}`;
-      document.getElementById("rankLabel").textContent="初审最终排名";
-      document.getElementById("personRank").textContent=`#${item.prelimRank}`;
-      document.getElementById("totalBox").hidden=true;
-      document.getElementById("progress").hidden=true;
-      document.getElementById("formula").hidden=true;
-      const card=document.getElementById("statusCard");
-      card.hidden=false;
-      card.innerHTML=`<h2>未晋级复审</h2><p>该作品的初审最终排名为 <strong>第 ${item.prelimRank} 名</strong>。复审已重新开始计分，因此本页面不再展示或沿用初审分数。</p>`;
+      renderReviews(item.reviews||[]);
+
+      if(item.status==="finalist"||item.status==="semifinal_eliminated"){
+        const advanced=item.status==="finalist";
+        if(!advanced) document.body.classList.add("semifinal-out");
+        document.getElementById("meta").textContent=`参赛编号 ${item.id} · 复审序号 ${item.finalSequence} · 初审第 ${item.prelimRank} 名`;
+        document.getElementById("personRank").textContent=`#${item.rank}`;
+        document.getElementById("total").textContent=number(item.total);
+        document.getElementById("statusLine").innerHTML=advanced
+          ?"<b>晋级终审</b> · 复审最终排名位于前 27 名"
+          :"<b>止步复审</b> · 已完成复审评定，未进入终审";
+        const dimensions=[
+          ["编曲创意度","creativity","25%"],
+          ["结构完整度","structure","15%"],
+          ["作曲音乐性","musicality","25%"],
+          ["混母制作质量","production","35%"],
+        ];
+        document.getElementById("scores").innerHTML=dimensions.map(([name,key,weight])=>`<article class="score"><span>${name}</span><strong>${number(item[key])}</strong><small>权重 ${weight}</small></article>`).join("");
+        if(!advanced){
+          const card=document.getElementById("statusCard");
+          card.hidden=false;
+          card.innerHTML=`<h2>未晋级终审</h2><p>该作品复审最终排名为 <strong>第 ${item.rank} 名</strong>，复审最终得分为 <strong>${number(item.total)} 分</strong>。</p>`;
+        }
+      }else{
+        document.body.classList.add("prelim-out");
+        document.getElementById("eyebrow").textContent="PRELIMINARY ROUND RESULT";
+        document.getElementById("meta").textContent=`参赛编号 ${item.id} · 初审序号 ${item.sequence}`;
+        document.getElementById("rankLabel").textContent="初审最终排名";
+        document.getElementById("personRank").textContent=`#${item.prelimRank}`;
+        document.getElementById("totalBox").hidden=true;
+        document.getElementById("statusLine").hidden=true;
+        document.getElementById("formula").hidden=true;
+        const card=document.getElementById("statusCard");
+        card.hidden=false;
+        card.innerHTML=`<h2>止步初审</h2><p>该作品初审最终排名为 <strong>第 ${item.prelimRank} 名</strong>，未进入正式复审排名。下方仍保留五位评委评语位置，未参与的轮次会标注为无评语。</p>`;
+      }
     }
   </script>
 </body>
