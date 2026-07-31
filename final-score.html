@@ -20,9 +20,9 @@
     .work-body{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.7fr);gap:20px;padding:20px}.inputs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.field label{display:block;min-height:30px;margin-bottom:7px;color:#88a6b4;font-size:10px;line-height:1.45}.field input{width:100%;height:46px;border:1px solid #6ac7df38;background:#020b12;color:#fff;padding:0 12px;font-size:17px;outline:none}.field input:focus{border-color:#36e6ff}.field input[aria-invalid="true"]{border-color:#d66e7b}.comment-field{grid-column:1/-1}.comment-field label{min-height:auto}.comment-field textarea{width:100%;min-height:76px;resize:vertical;border:1px solid #6ac7df2b;background:#020b12;color:#d8ecf2;padding:12px;outline:none;line-height:1.6}.comment-field textarea:focus{border-color:#36e6ff}
     .calculation{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start}.calc-item{padding:13px;border:1px solid #7fdfff1d;background:#04101a}.calc-item span{display:block;color:#668594;font-size:9px;line-height:1.4}.calc-item b{display:block;margin-top:7px;font-size:18px}.calc-item.final-judge b{color:#91effb}.calc-item.final-score{border-color:#36e6ff4d;background:#083044}.calc-item.final-score b{color:#fff;font-size:24px}.calc-note{grid-column:1/-1;color:#597786;font-size:8px;line-height:1.6}
     .sort-panel{margin-top:32px;padding:30px;border:1px solid #36e6ff3d;background:linear-gradient(135deg,#0a3548cc,#061421e8);text-align:center}.sort-panel h2{margin:0 0 10px}.sort-panel p{margin:0 auto 20px;max-width:650px;color:#8aa5b2;font-size:11px;line-height:1.8}.sort-button{min-width:min(360px,100%);min-height:54px;border:0;background:linear-gradient(135deg,#11c8df,#275ad1);color:#fff;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 10px 35px #08758f42}.sort-button:hover{filter:brightness(1.08)}
-    .ranking{margin-top:28px;padding:30px;border:1px solid #7fdfff2b;background:#071724ed}.ranking[hidden]{display:none}.ranking-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:20px}.ranking-head h2{margin:7px 0 0;font-size:29px}.ranking-head span{color:#78a0af;font-size:9px}.rank-list{display:grid;gap:8px}.rank-row{display:grid;grid-template-columns:52px minmax(0,1fr) repeat(4,100px);gap:10px;align-items:center;padding:14px 16px;border:1px solid #7fdfff1d;background:#061421}.rank-row.top{border-color:#36e6ff55;background:linear-gradient(90deg,#0b3548,#061421)}.rank-no{font-size:20px;color:#69dff0;font-weight:700}.rank-name b{display:block;overflow-wrap:anywhere}.rank-name span{display:block;margin-top:4px;color:#6f8d9b;font-size:9px}.rank-metric{text-align:right}.rank-metric span{display:block;color:#668493;font-size:8px}.rank-metric b{display:block;margin-top:4px;font-size:13px}.rank-metric.final b{color:#9ef2fd;font-size:17px}
-    @media(max-width:850px){.summary{grid-template-columns:1fr 1fr}.work-body{grid-template-columns:1fr}.rank-row{grid-template-columns:44px minmax(0,1fr) 84px 84px}.rank-row .hide-tablet{display:none}}
-    @media(max-width:600px){.wrap{width:min(100% - 20px,1120px);padding-top:18px}.hero{padding:25px 19px;margin-top:20px}.hero h1{font-size:36px}.summary{gap:7px}.summary-card{padding:14px 12px}.summary-card strong{font-size:20px}.toolbar{padding:10px;gap:7px}.btn{padding:0 10px;font-size:10px}.btn.danger{margin-left:0}.section-head{display:block}.section-head p{margin-top:8px;text-align:left}.work-head{grid-template-columns:auto minmax(0,1fr);gap:12px;padding:15px 13px}.completion{grid-column:1/-1;width:max-content}.sequence{min-width:58px}.sequence strong{font-size:24px}.identity b{font-size:12px}.work-body{padding:14px;gap:14px}.inputs{grid-template-columns:1fr 1fr;gap:9px}.field label{font-size:9px}.field input{height:44px}.calculation{grid-template-columns:1fr 1fr}.sort-panel{padding:24px 15px}.ranking{padding:22px 12px}.ranking-head{display:block}.ranking-head>span{display:block;margin-top:9px}.rank-row{grid-template-columns:35px minmax(0,1fr) 72px;padding:12px 9px;gap:7px}.rank-row .hide-mobile{display:none}.rank-no{font-size:16px}.rank-name b{font-size:11px}.rank-metric.final b{font-size:14px}}
+    .ranking{margin-top:28px;padding:30px;border:1px solid #7fdfff2b;background:#071724ed}.ranking[hidden]{display:none}.ranking-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:20px}.ranking-head h2{margin:7px 0 0;font-size:29px}.ranking-head span{color:#78a0af;font-size:9px}.winners-banner{display:grid;grid-template-columns:1.18fr 1fr 1fr;gap:10px;margin-bottom:18px}.winner-card{position:relative;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;border:1px solid;overflow:hidden;background:#071724}.winner-card:before{content:"";position:absolute;inset:0;background:url("album-cover-v5.jpg") center 42%/cover no-repeat;filter:saturate(.8) brightness(.48);transform:scale(1.03)}.winner-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 15%,#03101be6 84%)}.winner-card>*{position:relative;z-index:1}.winner-card.place-1{min-height:250px;border-color:#f2ce70a8;box-shadow:inset 0 0 45px #dca83924,0 15px 50px #0006}.winner-card.place-2{border-color:#b6d8e780}.winner-card.place-3{border-color:#d3946c80}.winner-place{font-size:10px;letter-spacing:.14em;color:#9fb9c4}.winner-card.place-1 .winner-place{color:#f5d675}.winner-card h3{margin:8px 0 6px;font-size:23px;overflow-wrap:anywhere}.winner-card strong{font-size:31px;color:#fff}.winner-card small{margin-top:7px;color:#88a5b3;letter-spacing:.06em}.rank-list{display:grid;gap:8px}.rank-row{display:grid;grid-template-columns:52px minmax(0,1fr) repeat(4,100px);gap:10px;align-items:center;padding:14px 16px;border:1px solid}.rank-tier-45{border-color:#b482da66;background:linear-gradient(90deg,#2c1e3bcf,#111526)}.rank-tier-45 .rank-no,.rank-tier-45 .rank-metric.final b{color:#d9adff}.rank-tier-610{border-color:#4f9dd85c;background:linear-gradient(90deg,#102d45d9,#081622)}.rank-tier-610 .rank-no,.rank-tier-610 .rank-metric.final b{color:#80c8ff}.rank-tier-rest{border-color:#66839238;background:#09151ed1}.rank-tier-rest .rank-no,.rank-tier-rest .rank-metric.final b{color:#8eb2c1}.rank-no{font-size:20px;font-weight:700}.rank-name b{display:block;overflow-wrap:anywhere}.rank-name span{display:block;margin-top:4px;color:#6f8d9b;font-size:9px}.rank-metric{text-align:right}.rank-metric span{display:block;color:#668493;font-size:8px}.rank-metric b{display:block;margin-top:4px;font-size:13px}.rank-metric.final b{font-size:17px}
+    @media(max-width:850px){.summary{grid-template-columns:1fr 1fr}.work-body{grid-template-columns:1fr}.winners-banner{grid-template-columns:1fr 1fr}.winner-card.place-1{grid-column:1/-1}.rank-row{grid-template-columns:44px minmax(0,1fr) 84px 84px}.rank-row .hide-tablet{display:none}}
+    @media(max-width:600px){.wrap{width:min(100% - 20px,1120px);padding-top:18px}.hero{padding:25px 19px;margin-top:20px}.hero h1{font-size:36px}.summary{gap:7px}.summary-card{padding:14px 12px}.summary-card strong{font-size:20px}.toolbar{padding:10px;gap:7px}.btn{padding:0 10px;font-size:10px}.btn.danger{margin-left:0}.section-head{display:block}.section-head p{margin-top:8px;text-align:left}.work-head{grid-template-columns:auto minmax(0,1fr);gap:12px;padding:15px 13px}.completion{grid-column:1/-1;width:max-content}.sequence{min-width:58px}.sequence strong{font-size:24px}.identity b{font-size:12px}.work-body{padding:14px;gap:14px}.inputs{grid-template-columns:1fr 1fr;gap:9px}.field label{font-size:9px}.field input{height:44px}.calculation{grid-template-columns:1fr 1fr}.sort-panel{padding:24px 15px}.ranking{padding:22px 12px}.ranking-head{display:block}.ranking-head>span{display:block;margin-top:9px}.winners-banner{grid-template-columns:1fr}.winner-card.place-1{grid-column:auto}.winner-card,.winner-card.place-1{min-height:190px;padding:18px}.winner-card h3{font-size:20px}.winner-card strong{font-size:26px}.rank-row{grid-template-columns:35px minmax(0,1fr) 72px;padding:12px 9px;gap:7px}.rank-row .hide-mobile{display:none}.rank-no{font-size:16px}.rank-name b{font-size:11px}.rank-metric.final b{font-size:14px}}
   </style>
 </head>
 <body>
@@ -43,10 +43,7 @@
 
     <div class="formula"><b>终审评委总分</b> = 编曲创意度 × 25% + 结构完整度 × 15% + 作曲音乐性 × 25% + 混母制作质量 × 35%<br><b>最终得分</b> = 复审评委 1 总分 × 30% + 复审评委 2 总分 × 30% + 终审评委总分 × 40%</div>
     <div class="toolbar">
-      <button class="btn" id="exportJson" type="button">导出 JSON 备份</button>
-      <button class="btn" id="importJson" type="button">导入 JSON 备份</button>
-      <button class="btn" id="exportCsv" type="button">导出成绩 CSV</button>
-      <input class="file-input" id="importFile" type="file" accept="application/json,.json">
+      <button class="btn" id="exportXlsx" type="button">导出终审评分表.xlsx</button>
       <button class="btn danger" id="clearAll" type="button">清空全部录入</button>
     </div>
 
@@ -61,11 +58,13 @@
 
     <section class="ranking" id="ranking" hidden>
       <div class="ranking-head"><div><div class="eyebrow">FINAL RESULT</div><h2>终审最终排名</h2></div><span id="rankTime"></span></div>
+      <div class="winners-banner" id="winnersBanner"></div>
       <div class="rank-list" id="rankList"></div>
     </section>
   </main>
 
-  <script src="final-score-data-v1.js?v=1"></script>
+  <script src="jszip.min.js?v=1"></script>
+  <script src="final-score-data-v2.js?v=2"></script>
   <script>
     const STORAGE_KEY="ocean-final-scoring-v1";
     const fields=["creativity","structure","musicality","production"];
@@ -182,43 +181,75 @@
       rankingCache=finalWorks.map(work=>({...work,...calculate(work,entryFor(work.sequence)),entry:entryFor(work.sequence)})).sort((a,b)=>
         b.finalScore-a.finalScore||b.finalJudgeTotal-a.finalJudgeTotal||b.semifinalAverage-a.semifinalAverage||a.sequence-b.sequence
       );
+      document.getElementById("winnersBanner").innerHTML=rankingCache.slice(0,3).map((item,index)=>`<article class="winner-card place-${index+1}">
+        <span class="winner-place">FINAL RANK ${String(index+1).padStart(2,"0")}</span>
+        <h3>${esc(item.name)}</h3>
+        <strong>${item.finalScore.toFixed(2)}</strong>
+        <small>复审序号 ${String(item.sequence).padStart(2,"0")} · 终审总分 ${item.finalJudgeTotal.toFixed(2)}</small>
+      </article>`).join("");
       const list=document.getElementById("rankList");
-      list.innerHTML=rankingCache.map((item,index)=>`<article class="rank-row ${index<3?"top":""}">
-        <div class="rank-no">${String(index+1).padStart(2,"0")}</div>
-        <div class="rank-name"><b>复审序号 ${String(item.sequence).padStart(2,"0")}</b><span>匿名终审作品</span></div>
+      list.innerHTML=rankingCache.slice(3).map((item,index)=>{
+        const rank=index+4;
+        const tier=rank<=5?"rank-tier-45":rank<=10?"rank-tier-610":"rank-tier-rest";
+        return `<article class="rank-row ${tier}">
+        <div class="rank-no">${String(rank).padStart(2,"0")}</div>
+        <div class="rank-name"><b>${esc(item.name)}</b><span>复审序号 ${String(item.sequence).padStart(2,"0")}</span></div>
         <div class="rank-metric hide-mobile"><span>复审评委 1</span><b>${item.semifinalJudge1.toFixed(2)}</b></div>
         <div class="rank-metric hide-tablet"><span>复审评委 2</span><b>${item.semifinalJudge2.toFixed(2)}</b></div>
         <div class="rank-metric hide-tablet"><span>终审总分</span><b>${item.finalJudgeTotal.toFixed(2)}</b></div>
         <div class="rank-metric final"><span>最终得分</span><b>${item.finalScore.toFixed(2)}</b></div>
-      </article>`).join("");
+      </article>`}).join("");
       const ranking=document.getElementById("ranking");
       ranking.hidden=false;
       document.getElementById("rankTime").textContent=`生成时间 ${new Date().toLocaleString("zh-CN")}`;
       ranking.scrollIntoView({behavior:"smooth",block:"start"});
     }
 
-    function download(name,type,content){
-      const blob=new Blob([content],{type});
+    function downloadBlob(name,blob){
       const url=URL.createObjectURL(blob);
       const link=document.createElement("a");
       link.href=url;link.download=name;link.click();
       setTimeout(()=>URL.revokeObjectURL(url),1000);
     }
 
-    function csvCell(value){
-      return `"${String(value??"").replace(/"/g,'""')}"`;
+    function xmlEscape(value){
+      return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"})[char]);
     }
 
-    function exportCsv(){
-      const allComplete=finalWorks.every(work=>calculate(work,entryFor(work.sequence)).complete);
-      const ranked=allComplete?[...finalWorks].map(work=>({...work,...calculate(work,entryFor(work.sequence))})).sort((a,b)=>b.finalScore-a.finalScore||b.finalJudgeTotal-a.finalJudgeTotal||b.semifinalAverage-a.semifinalAverage||a.sequence-b.sequence):[];
-      const rankMap=new Map(ranked.map((item,index)=>[item.sequence,index+1]));
-      const rows=[["最终排名","复审序号","复审评委1总分","复审评委2总分","编曲创意度","结构完整度","作曲音乐性","混母制作质量","终审评委总分","最终得分","终审评语"]];
-      for(const work of finalWorks){
-        const entry=entryFor(work.sequence);const result=calculate(work,entry);
-        rows.push([rankMap.get(work.sequence)||"",work.sequence,work.semifinalJudge1,work.semifinalJudge2,entry.creativity,entry.structure,entry.musicality,entry.production,result.finalJudgeTotal?.toFixed(2)||"",result.finalScore?.toFixed(2)||"",entry.comment||""]);
-      }
-      download(`Ocean终审成绩_${new Date().toISOString().slice(0,10)}.csv`,"text/csv;charset=utf-8","\ufeff"+rows.map(row=>row.map(csvCell).join(",")).join("\r\n"));
+    function scoreCell(ref,raw){
+      const value=Number(raw);
+      return raw!==""&&Number.isFinite(value)&&value>=0&&value<=100?`<c r="${ref}" s="1"><v>${value}</v></c>`:`<c r="${ref}" s="1"/>`;
+    }
+
+    async function exportXlsx(){
+      const button=document.getElementById("exportXlsx");
+      button.disabled=true;button.textContent="正在生成 Excel…";
+      try{
+        const response=await fetch("final-score-template-v1.xlsx?v=1",{cache:"no-store"});
+        if(!response.ok)throw new Error("template download failed");
+        const zip=await JSZip.loadAsync(await response.arrayBuffer());
+        const sheetPath="xl/worksheets/sheet1.xml";
+        let sheetXml=await zip.file(sheetPath).async("string");
+        const header=sheetXml.match(/<row r="1"[\s\S]*?<\/row>/)?.[0];
+        if(!header)throw new Error("template header missing");
+        const rows=[header];
+        finalWorks.forEach((work,index)=>{
+          const row=index+2;const entry=entryFor(work.sequence);const result=calculate(work,entry);
+          const cachedTotal=result.complete?result.finalJudgeTotal:fields.reduce((sum,field)=>{const value=Number(entry[field]);return sum+(Number.isFinite(value)&&value>=0&&value<=100?value*weights[field]:0)},0);
+          const comment=entry.comment?`<c r="G${row}" s="1" t="inlineStr"><is><t xml:space="preserve">${xmlEscape(entry.comment)}</t></is></c>`:"";
+          rows.push(`<row r="${row}" spans="1:7"><c r="A${row}" s="1"><v>${work.sequence}</v></c>${scoreCell(`B${row}`,entry.creativity)}${scoreCell(`C${row}`,entry.structure)}${scoreCell(`D${row}`,entry.musicality)}${scoreCell(`E${row}`,entry.production)}<c r="F${row}" s="1"><f>B${row}*0.25+C${row}*0.15+D${row}*0.25+E${row}*0.35</f><v>${cachedTotal}</v></c>${comment}</row>`);
+        });
+        sheetXml=sheetXml.replace(/<dimension ref="[^"]+"\/>/,`<dimension ref="A1:G${finalWorks.length+1}"/>`).replace(/<sheetData>[\s\S]*?<\/sheetData>/,`<sheetData>${rows.join("")}</sheetData>`);
+        zip.file(sheetPath,sheetXml);
+        const workbookPath="xl/workbook.xml";
+        let workbookXml=await zip.file(workbookPath).async("string");
+        const calcPr='<calcPr calcId="171027" calcMode="auto" fullCalcOnLoad="1" forceFullCalc="1"/>';
+        workbookXml=/<calcPr[\s\S]*?\/>/.test(workbookXml)?workbookXml.replace(/<calcPr[\s\S]*?\/>/,calcPr):workbookXml.replace("</workbook>",`${calcPr}</workbook>`);
+        zip.file(workbookPath,workbookXml);
+        const blob=await zip.generateAsync({type:"blob",mimeType:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",compression:"DEFLATE"});
+        downloadBlob(`终审评分表格_${new Date().toISOString().slice(0,10)}.xlsx`,blob);
+      }catch(error){alert("Excel 文件生成失败，请刷新页面后重试。");}
+      finally{button.disabled=false;button.textContent="导出终审评分表.xlsx";}
     }
 
     renderWorks();
@@ -239,27 +270,9 @@
     });
 
     document.getElementById("sortButton").addEventListener("click",rankResults);
-    document.getElementById("exportCsv").addEventListener("click",exportCsv);
-    document.getElementById("exportJson").addEventListener("click",()=>download(`Ocean终审备份_${new Date().toISOString().replace(/[:.]/g,"-")}.json`,"application/json;charset=utf-8",JSON.stringify({version:1,exportedAt:new Date().toISOString(),entries:state.entries},null,2)));
-    document.getElementById("importJson").addEventListener("click",()=>document.getElementById("importFile").click());
-    document.getElementById("importFile").addEventListener("change",async event=>{
-      const file=event.target.files[0];if(!file)return;
-      try{
-        const parsed=JSON.parse(await file.text());
-        if(!parsed.entries||typeof parsed.entries!=="object")throw new Error("invalid backup");
-        const restored={};
-        finalWorks.forEach(work=>{
-          const source=parsed.entries[work.sequence]||{};
-          restored[work.sequence]={...blankEntry(),...Object.fromEntries([...fields,"comment"].map(field=>[field,String(source[field]??"")]))};
-        });
-        state={version:1,entries:restored,savedAt:null};saveState();
-        renderWorks();finalWorks.forEach(updateCard);updateSummary();invalidateRanking();
-        alert("备份已成功导入。");
-      }catch(error){alert("无法导入：这不是有效的终审评分备份文件。");}
-      event.target.value="";
-    });
+    document.getElementById("exportXlsx").addEventListener("click",exportXlsx);
     document.getElementById("clearAll").addEventListener("click",()=>{
-      if(!confirm("确定清空当前浏览器中全部 27 份终审评分吗？此操作无法撤销，建议先导出 JSON 备份。"))return;
+      if(!confirm("确定清空当前浏览器中全部 27 份终审评分吗？此操作无法撤销，建议先导出 Excel 评分表备份。"))return;
       state={version:1,entries:{},savedAt:null};localStorage.removeItem(STORAGE_KEY);renderWorks();finalWorks.forEach(updateCard);updateSummary();invalidateRanking();document.getElementById("saveState").textContent="已清空全部录入";
     });
     window.addEventListener("storage",event=>{
