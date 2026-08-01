@@ -24,7 +24,7 @@
     .final-popularity-award{position:absolute;z-index:4;left:50%;bottom:19px;width:min(340px,38%);transform:translateX(-50%);padding:9px 14px;border:1px solid #e9cb756e;background:linear-gradient(90deg,#251d0bd9,#07101ae8,#251d0bd9);color:#fff;text-align:center;text-decoration:none;box-shadow:0 8px 30px #0009,0 0 25px #e3bf5521;backdrop-filter:blur(10px)}.final-popularity-award span{display:block;color:#d9b95f;font-size:7px;letter-spacing:.2em}.final-popularity-award b{display:block;margin-top:4px;color:#ffedb5;font-family:Georgia,"Noto Serif SC","Microsoft YaHei",serif;font-size:12px;font-weight:500}.final-popularity-award small{display:block;margin-top:3px;color:#aab6ba;font-size:7px;letter-spacing:.05em}
     @media(max-width:850px){.summary{grid-template-columns:1fr 1fr}.work-body{grid-template-columns:1fr}.winners-banner{min-height:350px}.winner-card{padding-bottom:42px}.winner-card.place-1{padding-bottom:82px}.winner-card h3{font-size:18px}.winner-card.place-1 h3{font-size:24px}.winner-card strong{font-size:27px}.winner-card.place-1 strong{font-size:37px}.winner-card small{font-size:7px}.rank-row{grid-template-columns:44px minmax(0,1fr) 84px 84px}.rank-row .hide-tablet{display:none}}
     @media(max-width:600px){.wrap{width:min(100% - 20px,1120px);padding-top:18px}.hero{padding:25px 19px;margin-top:20px}.hero h1{font-size:36px}.summary{gap:7px}.summary-card{padding:14px 12px}.summary-card strong{font-size:20px}.toolbar{padding:10px;gap:7px}.btn{padding:0 10px;font-size:10px}.btn.danger{margin-left:0}.section-head{display:block}.section-head p{margin-top:8px;text-align:left}.work-head{grid-template-columns:auto minmax(0,1fr);gap:12px;padding:15px 13px}.completion{grid-column:1/-1;width:max-content}.sequence{min-width:58px}.sequence strong{font-size:24px}.identity b{font-size:12px}.work-body{padding:14px;gap:14px}.inputs{grid-template-columns:1fr 1fr;gap:9px}.field label{font-size:9px}.field input{height:44px}.calculation{grid-template-columns:1fr 1fr}.sort-panel{padding:24px 15px}.ranking{padding:22px 8px}.ranking-head{display:block;padding:0 4px}.ranking-head>span{display:block;margin-top:9px}.winners-banner{grid-template-columns:30% 40% 30%;min-height:245px;aspect-ratio:auto;padding:0 2px;background-position:center;border-left:0;border-right:0}.winners-banner:after{inset:6px}.podium-heading{top:12px;left:11px;right:11px;font-size:6px;letter-spacing:.13em}.podium-heading b{font-size:7px;letter-spacing:.18em}.podium-heading:after{top:15px}.winner-card{padding:45px 2px 23px}.winner-card.place-1{padding-bottom:57px}.winner-place{padding:3px 5px;font-size:6px;letter-spacing:.09em}.winner-card h3,.winner-card.place-1 h3{margin:7px 0 4px;font-size:11px;letter-spacing:0}.winner-card.place-1 h3{font-size:13px}.winner-card strong{font-size:18px}.winner-card.place-1 strong{font-size:23px}.winner-card small{display:none}.winner-card:after{width:22px;margin-top:7px}.final-popularity-award{bottom:6px;width:94%;padding:5px 8px}.final-popularity-award span{font-size:5px}.final-popularity-award b{margin-top:2px;font-size:8px}.final-popularity-award small{margin-top:1px;font-size:6px}.rank-row{grid-template-columns:35px minmax(0,1fr) 50px 64px;padding:12px 7px;gap:5px}.rank-row .hide-mobile{display:none}.rank-no{font-size:16px}.rank-name b{font-size:11px}.rank-metric span{font-size:6px}.rank-metric.final b{font-size:14px}}
-    .calculation{grid-template-columns:1fr}.calc-note{padding:13px;border:1px solid #7fdfff1d;background:#03101a;color:#7694a1;font-size:9px}@media(min-width:851px){.rank-row{grid-template-columns:52px minmax(0,1fr) repeat(3,100px)}}
+    .calculation{grid-template-columns:1fr}.calc-note{padding:13px;border:1px solid #7fdfff1d;background:#03101a;color:#7694a1;font-size:9px}@media(min-width:851px){.rank-row{grid-template-columns:52px minmax(0,1fr) 120px}}@media(max-width:850px){.rank-row{grid-template-columns:44px minmax(0,1fr) 84px}}
   </style>
 </head>
 <body>
@@ -75,7 +75,6 @@
     const weights={creativity:.25,structure:.15,musicality:.25,production:.35};
     const esc=value=>String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
     const formatCount=value=>Number(value).toLocaleString("zh-CN");
-    const promotionStatsText=work=>work.promotionStatus==="ok"?`播放 ${formatCount(work.promotionViews)} · 点赞 ${formatCount(work.promotionLikes)}`:work.promotionStatus==="unavailable"?"宣传视频当前不可见":"未发布宣传视频";
     const blankEntry=()=>({creativity:"",structure:"",musicality:"",production:"",comment:""});
 
     function loadState(){
@@ -188,7 +187,7 @@
         <span class="winner-place">FINAL RANK ${String(index+1).padStart(2,"0")}</span>
         <h3>${esc(item.name)}</h3>
         <strong>${item.finalScore.toFixed(2)}</strong>
-        <small>复审序号 ${String(item.sequence).padStart(2,"0")} · ${promotionStatsText(item)}<br>加权评审 ${item.weightedJudgeScore.toFixed(2)} + 宣传 ${item.promotionBonus}</small>
+        <small>复审序号 ${String(item.sequence).padStart(2,"0")}</small>
       </article>`).join("")+`<a class="final-popularity-award" href="detail.html?id=${popularity.participantId}"><span>BEST POPULARITY AWARD</span><b>最佳人气奖 · ${esc(popularity.name)}</b><small>播放 ${formatCount(popularity.views)} · 点赞 ${formatCount(popularity.likes)} · 宣传加分 +${popularity.bonus}</small></a>`;
       const list=document.getElementById("rankList");
       list.innerHTML=rankingCache.slice(3).map((item,index)=>{
@@ -196,9 +195,7 @@
         const tier=rank<=5?"rank-tier-45":rank<=10?"rank-tier-610":"rank-tier-rest";
         return `<article class="rank-row ${tier}">
         <div class="rank-no">${String(rank).padStart(2,"0")}</div>
-        <div class="rank-name"><b>${esc(item.name)}</b><span>复审序号 ${String(item.sequence).padStart(2,"0")} · ${promotionStatsText(item)}</span></div>
-        <div class="rank-metric hide-tablet"><span>终审总分</span><b>${item.finalJudgeTotal.toFixed(2)}</b></div>
-        <div class="rank-metric promotion"><span>宣传加分</span><b>+${item.promotionBonus}</b></div>
+        <div class="rank-name"><b>${esc(item.name)}</b><span>复审序号 ${String(item.sequence).padStart(2,"0")}</span></div>
         <div class="rank-metric final"><span>最终总分</span><b>${item.finalScore.toFixed(2)}</b></div>
       </article>`}).join("");
       const ranking=document.getElementById("ranking");
