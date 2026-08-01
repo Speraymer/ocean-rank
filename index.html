@@ -4,90 +4,122 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#020a12">
-  <title>Ocean Rank｜终审晋级名单</title>
+  <meta name="description" content="Ocean Of Us Remix Contest 2026 最终排行榜">
+  <title>Ocean Rank｜最终排行榜</title>
   <style>
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{margin:0;background:#020a12;color:#eafaff;font-family:Arial,"Microsoft YaHei",sans-serif}
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 75% 15%,#07527a55,transparent 30%),linear-gradient(#06314a18 1px,transparent 1px),linear-gradient(90deg,#06314a18 1px,transparent 1px);background-size:auto,50px 50px,50px 50px}
-    nav{height:76px;max-width:1100px;margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #7fdfff22;position:relative;z-index:4}
-    .brand{letter-spacing:.18em}.brand b{color:#36e6ff}.badge,small{font-size:10px;letter-spacing:.2em;color:#57d8ec}.nav-actions{display:flex;align-items:center;gap:13px}.console-link{padding:9px 12px;border:1px solid #36e6ff55;color:#9af2ff;text-decoration:none;font-size:9px;letter-spacing:.08em;background:#06223199}.console-link:hover{border-color:#36e6ffaa;background:#093247}
-    .hero{text-align:center;padding:110px 20px 80px}.hero h1{font-size:clamp(54px,10vw,108px);letter-spacing:-.07em;line-height:.92;margin:25px 0}.hero h1 span{color:transparent;-webkit-text-stroke:1px #45daf0}.hero p{max-width:610px;margin:auto;color:#c1d8e4;line-height:1.9}
-    .query,.ranking{max-width:980px;margin:0 auto 90px;padding:30px;border:1px solid #7fdfff22;background:#071724dd}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 75% 14%,#07527a55,transparent 28%),linear-gradient(#06314a18 1px,transparent 1px),linear-gradient(90deg,#06314a18 1px,transparent 1px);background-size:auto,50px 50px,50px 50px}
+    nav{height:76px;max-width:1120px;margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #7fdfff22;position:relative;z-index:4}
+    .brand{letter-spacing:.18em}.brand b{color:#36e6ff}.badge,small{font-size:10px;letter-spacing:.2em;color:#57d8ec}.badge{padding:8px 11px;border:1px solid #d9bb6852;color:#f3d88e;background:#392b1038}
+    .hero{text-align:center;padding:108px 20px 78px;position:relative}.hero h1{font-size:clamp(54px,10vw,108px);letter-spacing:-.07em;line-height:.92;margin:25px 0}.hero h1 span{color:transparent;-webkit-text-stroke:1px #45daf0}.hero p{max-width:640px;margin:auto;color:#c1d8e4;line-height:1.9}
+    .query,.ranking{position:relative;max-width:1000px;margin:0 auto 90px;padding:30px;border:1px solid #7fdfff22;background:#071724e8}
     .query{display:grid;grid-template-columns:1fr 1.3fr;gap:35px}.query h2,.ranking h2{font-size:30px;margin:8px 0 12px}.query p{color:#849dad;line-height:1.7}
     .search{display:flex;margin-top:12px}.search input{flex:1;min-width:0;background:#020b12;border:1px solid #6ac7df44;color:white;padding:14px}.search button{border:0;background:linear-gradient(135deg,#0ecbe4,#1961d4);color:white;padding:0 24px;font-weight:bold;cursor:pointer}
-    .result{grid-column:1/-1;padding:18px;border:1px solid #36e6ff33;display:none}.result a{display:block;color:inherit;text-decoration:none}.result strong{font-size:30px;color:#36e6ff;margin-right:18px}
-    .progress-note{display:flex;align-items:center;gap:9px;margin-bottom:24px;padding:14px 17px;border:1px solid #36e6ff3d;background:linear-gradient(90deg,#1170912e,#0a26383d);color:#85e9f7;font-size:11px;line-height:1.7}.progress-note b{color:#fff}.pulse{width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:#36e6ff;box-shadow:0 0 14px #36e6ff}.promo-chip{display:inline-block;margin-top:7px;padding:4px 7px;border:1px solid #d7ba6750;color:#d9c689;font-size:8px;font-style:normal;letter-spacing:.03em}
-    .ranking-title{display:flex;align-items:end;justify-content:space-between;gap:20px}.ranking-title>span{margin-bottom:12px;padding:6px 10px;border:1px solid #36e6ff4d;color:#74deef;font-size:9px;letter-spacing:.14em}.ranking-help{margin:0;color:#718e9e;font-size:11px;line-height:1.8}
-    .legend{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 5px}.legend span{padding:7px 10px;border:1px solid;font-size:9px;letter-spacing:.08em}.legend .advance{border-color:#36e6ff55;color:#86efff}.legend .semi-out{border-color:#dc9d5155;color:#edbc80}.legend .prelim-out{border-color:#b4778455;color:#d0a0aa}
-    .podium{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0}.card,.row{border:1px solid #7fdfff20;background:#061421;text-decoration:none;color:inherit;transition:.2s ease}.card:hover,.row:hover{transform:translateY(-1px)}.card{padding:22px;text-align:center}.card strong{display:block;font-size:45px;color:#36e6ff}.card h3{font-size:14px}.card span{font-size:11px;color:#829baa;line-height:1.7}
-    .row{display:grid;grid-template-columns:55px minmax(0,1fr) auto;gap:14px;align-items:center;margin-top:8px;padding:18px 22px}.rank-number{font-size:20px;font-weight:700;color:#5d899d}.identity{min-width:0}.identity b{display:block;overflow-wrap:anywhere}.identity span{display:block;margin-top:6px;color:#829baa;font-size:11px}.row-score{text-align:right}.row-score b{display:block;color:#baf7ff;font-size:17px}.row-score small{display:block;margin-top:4px;color:#668a9b;letter-spacing:.08em}
-    .finalist-row:hover,.card:hover{border-color:#36e6ff80;background:#092033}.stage-divider{margin:34px 0 15px;padding:22px 20px;border:1px solid;text-align:center}.stage-divider span,.stage-divider b,.stage-divider small{display:block}.stage-divider span{font-size:8px;letter-spacing:.22em}.stage-divider b{margin:8px 0;font-size:17px}.stage-divider small{letter-spacing:.03em;line-height:1.6}.semi-divider{border-color:#dc9d5144;background:linear-gradient(135deg,#6f491f38,#1b1712b3)}.semi-divider span{color:#b98245}.semi-divider b{color:#f0c18b}.semi-divider small{color:#a28667}.prelim-divider{border-color:#b4778440;background:linear-gradient(135deg,#5c2b3742,#14141cb3)}.prelim-divider span{color:#a4747e}.prelim-divider b{color:#d2a6af}.prelim-divider small{color:#816d72}
-    .semifinal-out-row{border-color:#dc9d5133;background:#2b2116b8;color:#cfb291}.semifinal-out-row:hover{border-color:#e6aa6066;background:#382818}.semifinal-out-row .rank-number,.semifinal-out-row .row-score b{color:#e2ad6c}.semifinal-out-row .identity span,.semifinal-out-row .row-score small{color:#91785e}
-    .prelim-out-row{border-color:#b477842e;background:#26161db8;color:#aa9096}.prelim-out-row:hover{border-color:#cd8b9961;background:#381d27}.prelim-out-row .rank-number,.prelim-out-row .row-score b{color:#bd8792}.prelim-out-row .identity span,.prelim-out-row .row-score small{color:#796c70}.out-mark{font-size:10px;letter-spacing:.08em}
+    .result{grid-column:1/-1;padding:18px;border:1px solid #36e6ff33;display:none;line-height:1.75}.result a{display:block;color:inherit;text-decoration:none}.result strong{font-size:30px;color:#36e6ff;margin-right:18px}
+    .progress-note{display:flex;align-items:center;gap:9px;margin-bottom:24px;padding:14px 17px;border:1px solid #d9bb6847;background:linear-gradient(90deg,#7e5b1b2c,#0a26383d);color:#f0d588;font-size:11px;line-height:1.7}.progress-note b{color:#fff}.pulse{width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:#f0cf70;box-shadow:0 0 14px #f0cf70}
+    .ranking-title{display:flex;align-items:end;justify-content:space-between;gap:20px}.ranking-title>span{margin-bottom:12px;padding:6px 10px;border:1px solid #d9bb6855;color:#efd58b;font-size:9px;letter-spacing:.14em}.ranking-help{margin:0;color:#718e9e;font-size:11px;line-height:1.8}
+    .legend{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 5px}.legend span{padding:7px 10px;border:1px solid;font-size:9px;letter-spacing:.08em}.legend .final{border-color:#d9bb6855;color:#f0d891}.legend .semi-out{border-color:#dc9d5155;color:#edbc80}.legend .prelim-out{border-color:#b4778455;color:#d0a0aa}
+    .podium-stage{position:relative;margin:30px 0 20px;padding:42px 24px 25px;min-height:470px;border:1px solid #d9bb6840;background:linear-gradient(180deg,#02081238,#020812e8),url("final-podium-bg-v1.png") center/cover no-repeat;overflow:hidden}
+    .podium-stage:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#02091299,transparent 22%,transparent 78%,#02091299),linear-gradient(180deg,#02091235,transparent 55%,#020912e8);pointer-events:none}
+    .ceremony{position:relative;text-align:center}.ceremony small{color:#e5c86f}.ceremony h3{margin:9px 0 0;font-size:26px;letter-spacing:.08em}
+    .podium{position:relative;display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:13px;align-items:end;margin-top:175px}.winner-card{min-width:0;padding:22px 12px 18px;text-align:center;border:1px solid;text-decoration:none;color:inherit;background:#03101dd9;backdrop-filter:blur(8px);transition:.2s ease}.winner-card:hover{transform:translateY(-3px)}
+    .winner-card.place-1{order:2;padding-top:30px;border-color:#f0d27599;box-shadow:0 0 45px #d8a83e2b}.winner-card.place-2{order:1;border-color:#70e4ff80}.winner-card.place-3{order:3;border-color:#d9a0e080}.winner-rank{font-size:9px;letter-spacing:.18em}.place-1 .winner-rank{color:#ffe59b}.place-2 .winner-rank{color:#95efff}.place-3 .winner-rank{color:#e4b5ea}.winner-card strong{display:block;margin:8px 0 3px;font-size:34px}.winner-card h3{margin:10px 0 7px;font-size:15px;overflow-wrap:anywhere}.winner-card span{display:block;color:#91aab5;font-size:9px;line-height:1.7}.winner-card i{display:inline-block;margin-top:9px;padding:4px 7px;border:1px solid #d7ba6750;color:#f0d891;font-size:8px;font-style:normal}
+    .popularity-award{position:relative;margin:0 0 26px;padding:18px 20px;border:1px solid #e3c5655f;background:linear-gradient(100deg,#58411445,#061421e8 55%,#0b2632e8);display:flex;align-items:center;justify-content:space-between;gap:18px}.popularity-award small{color:#d7b758}.popularity-award b{display:block;margin-top:6px;color:#fff0b7;font-size:19px}.popularity-award p{margin:0;color:#a8966d;font-size:10px;line-height:1.7;text-align:right}
+    .row{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:14px;align-items:center;margin-top:8px;padding:18px 22px;border:1px solid #7fdfff20;background:#061421;text-decoration:none;color:inherit;transition:.2s ease}.row:hover{transform:translateY(-1px)}.rank-number{font-size:20px;font-weight:700;color:#5d899d}.identity{min-width:0}.identity b{display:block;overflow-wrap:anywhere}.identity span{display:block;margin-top:6px;color:#829baa;font-size:11px;line-height:1.55}.row-score{text-align:right}.row-score b{display:block;color:#baf7ff;font-size:17px}.row-score small{display:block;margin-top:4px;color:#668a9b;letter-spacing:.08em}.bonus{color:#efd48a}
+    .tier-excellence{border-color:#d7ba6747;background:linear-gradient(90deg,#392a123f,#061421)}.tier-excellence .rank-number,.tier-excellence .row-score b{color:#efd58b}.tier-honour{border-color:#8c72d642;background:linear-gradient(90deg,#241b4538,#061421)}.tier-honour .rank-number,.tier-honour .row-score b{color:#b8a5ff}.tier-finalist:hover{border-color:#36e6ff80;background:#092033}
+    .stage-divider{margin:34px 0 15px;padding:22px 20px;border:1px solid;text-align:center}.stage-divider span,.stage-divider b,.stage-divider small{display:block}.stage-divider span{font-size:8px;letter-spacing:.22em}.stage-divider b{margin:8px 0;font-size:17px}.stage-divider small{letter-spacing:.03em;line-height:1.6}.semi-divider{border-color:#dc9d5144;background:linear-gradient(135deg,#6f491f38,#1b1712b3)}.semi-divider span{color:#b98245}.semi-divider b{color:#f0c18b}.semi-divider small{color:#a28667}.prelim-divider{border-color:#b4778440;background:linear-gradient(135deg,#5c2b3742,#14141cb3)}.prelim-divider span{color:#a4747e}.prelim-divider b{color:#d2a6af}.prelim-divider small{color:#816d72}
+    .semifinal-out-row{border-color:#dc9d5133;background:#2b2116b8;color:#cfb291}.semifinal-out-row:hover{border-color:#e6aa6066;background:#382818}.semifinal-out-row .rank-number,.semifinal-out-row .row-score b{color:#e2ad6c}.semifinal-out-row .identity span,.semifinal-out-row .row-score small{color:#91785e}.prelim-out-row{border-color:#b477842e;background:#26161db8;color:#aa9096}.prelim-out-row:hover{border-color:#cd8b9961;background:#381d27}.prelim-out-row .rank-number,.prelim-out-row .row-score b{color:#bd8792}.prelim-out-row .identity span,.prelim-out-row .row-score small{color:#796c70}.out-mark{font-size:10px;letter-spacing:.08em}
     .result.is-semifinal-out{border-color:#dc9d5155;background:#61421f38;color:#d8b183}.result.is-semifinal-out strong{color:#e5ad67}.result.is-prelim-out{border-color:#be7e8b59;background:#3a1c266b;color:#bd9ca3}.result.is-prelim-out strong{color:#c28692}
     footer{text-align:center;color:#4c6b7a;padding:30px;font-size:10px;letter-spacing:.15em}
-    @media(max-width:650px){nav{height:62px;padding:0 16px}.brand{font-size:12px}.badge{display:none}.console-link{padding:8px 9px;font-size:8px}.hero{padding:72px 18px 54px}.hero small{font-size:8px;line-height:1.8}.hero h1{font-size:42px;line-height:1.03;letter-spacing:-.045em;margin:20px 0}.hero h1 span{display:inline-block;margin-top:5px;color:#5ee9ff;-webkit-text-stroke:0;text-shadow:0 0 22px #08bfe755}.hero p{font-size:13px;max-width:310px}.query{grid-template-columns:1fr;margin:0 15px 70px;padding:24px 20px;gap:18px}.query h2,.ranking h2{font-size:25px}.query p{font-size:12px}.search{display:grid}.search input,.search button{width:100%;min-height:46px}.search button{margin-top:9px}.result{grid-column:auto;font-size:12px;line-height:1.8}.result strong{display:block;font-size:27px;margin:0 0 6px}.ranking{margin:0 15px 60px;padding:24px 14px}.progress-note{align-items:flex-start;padding:12px;font-size:9px}.pulse{margin-top:4px}.ranking-title{align-items:flex-start}.ranking-title>span{margin-top:4px;margin-bottom:0;white-space:nowrap}.ranking-help{font-size:9px}.legend{gap:6px}.legend span{font-size:8px;padding:6px 7px}.podium{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:24px 0 18px}.card{padding:16px 5px;min-width:0}.card small{font-size:7px}.card strong{font-size:31px;margin:6px 0}.card h3{font-size:10px;line-height:1.35;min-height:28px;margin:8px 0 5px;overflow-wrap:anywhere}.card span{display:block;font-size:8px}.promo-chip{font-size:7px;padding:3px 5px}.row{grid-template-columns:38px minmax(0,1fr) auto;gap:8px;padding:15px 12px}.rank-number{font-size:15px}.identity b{font-size:12px}.identity span{font-size:9px;line-height:1.45}.row-score b{font-size:13px}.row-score small{font-size:7px}.stage-divider{margin-top:28px;padding:18px 12px}.stage-divider b{font-size:15px}.out-mark{font-size:8px}footer{font-size:8px;padding:25px 12px}}
+    @media(max-width:650px){
+      nav{height:62px;padding:0 16px}.brand{font-size:12px}.badge{font-size:7px;padding:6px 7px}.hero{padding:72px 18px 54px}.hero small{font-size:8px;line-height:1.8}.hero h1{font-size:42px;line-height:1.03;letter-spacing:-.045em;margin:20px 0}.hero h1 span{display:inline-block;margin-top:5px;color:#5ee9ff;-webkit-text-stroke:0;text-shadow:0 0 22px #08bfe755}.hero p{font-size:13px;max-width:315px}
+      .query{grid-template-columns:1fr;margin:0 15px 70px;padding:24px 20px;gap:18px}.query h2,.ranking h2{font-size:25px}.query p{font-size:12px}.search{display:grid}.search input,.search button{width:100%;min-height:46px}.search button{margin-top:9px}.result{grid-column:auto;font-size:12px}.result strong{display:block;font-size:27px;margin:0 0 6px}
+      .ranking{margin:0 15px 60px;padding:24px 14px}.progress-note{align-items:flex-start;padding:12px;font-size:9px}.pulse{margin-top:4px}.ranking-title{align-items:flex-start}.ranking-title>span{margin-top:4px;margin-bottom:0;white-space:nowrap}.ranking-help{font-size:9px}.legend{gap:6px}.legend span{font-size:8px;padding:6px 7px}
+      .podium-stage{min-height:0;padding:27px 10px 15px;background-position:center}.ceremony h3{font-size:20px}.podium{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:120px}.winner-card,.winner-card.place-1{padding:15px 5px}.winner-rank{font-size:6px}.winner-card strong{font-size:24px}.winner-card h3{font-size:9px;line-height:1.35;min-height:25px}.winner-card span{font-size:7px}.winner-card i{font-size:6px;padding:3px 4px}
+      .popularity-award{display:block;padding:16px}.popularity-award b{font-size:16px}.popularity-award p{margin-top:9px;text-align:left;font-size:8px}
+      .row{grid-template-columns:38px minmax(0,1fr) auto;gap:8px;padding:15px 12px}.rank-number{font-size:15px}.identity b{font-size:12px}.identity span{font-size:9px;line-height:1.45}.row-score b{font-size:13px}.row-score small{font-size:7px}.stage-divider{margin-top:28px;padding:18px 12px}.stage-divider b{font-size:15px}.out-mark{font-size:8px}footer{font-size:8px;padding:25px 12px}
+    }
   </style>
   <link rel="stylesheet" href="theme-v5.css?v=5">
 </head>
 <body>
-  <nav><div class="brand">OCEAN <b>RANK</b></div><div class="nav-actions"><div class="badge">FINALISTS REVEALED</div><a class="console-link" href="final-score.html">终审评分台 →</a></div></nav>
+  <nav>
+    <div class="brand">OCEAN <b>RANK</b></div>
+    <div class="badge">FINAL RESULTS · 已公布</div>
+  </nav>
   <section class="hero">
     <small>OCEAN OF US · REMIX CONTEST 2026</small>
     <h1>让每一份声音<br><span>浮出海面</span></h1>
-    <p>复审评定已经结束。三位复审评委的成绩均已计入，排名前 27 位的作品正式晋级终审。</p>
+    <p>终审评定已经结束。三位复审评委、终审评委与宣传附加分均已计入，Ocean Of Us Remix Contest 2026 最终结果现已正式公布。</p>
   </section>
   <section class="query">
-    <div><small>FIND YOUR POSITION</small><h2>查询我的排名</h2><p>输入报名时获得的参赛编号，可查看晋级状态、复审成绩、宣传视频数据、附加分与六位评委的文字评价。</p></div>
-    <form class="search" id="searchForm"><input id="participantId" inputmode="numeric" autocomplete="off" placeholder="例如：12"><button type="submit">查询排名</button></form>
+    <div><small>FIND YOUR POSITION</small><h2>查询我的最终结果</h2><p>输入报名时获得的参赛编号，可查看最终名次、总分、宣传附加分，以及初审、复审与终审的完整评分记录。</p></div>
+    <form class="search" id="searchForm"><input id="participantId" inputmode="numeric" autocomplete="off" placeholder="例如：2" aria-label="参赛编号"><button type="submit">查询结果</button></form>
     <div class="result" id="result" aria-live="polite"></div>
   </section>
   <section class="ranking">
-    <div class="progress-note"><span class="pulse"></span><div><b>当前进度：</b>三位复审评委评分已全部汇总 · 前 27 名晋级终审 · 宣传视频数据与附加分已统计</div></div>
-    <div class="ranking-title"><div><small>THE FINALISTS</small><h2>终审晋级名单</h2></div><span>27 ADVANCE</span></div>
-    <p class="ranking-help">本页按照三位复审评委的平均成绩排序；宣传附加分只在终审最终总分中计入，不改变复审名次。点击任意一行可查看详细数据与评语。</p>
-    <div class="legend"><span class="advance">青色 · 晋级终审</span><span class="semi-out">琥珀色 · 止步复审</span><span class="prelim-out">玫瑰色 · 止步初审</span></div>
-    <div class="podium" id="podium"></div>
+    <div class="progress-note"><span class="pulse"></span><div><b>赛事进度：</b>终审已结束 · 最终排行榜已公布 · 终审评分通道已关闭</div></div>
+    <div class="ranking-title"><div><small>THE FINAL RESULTS</small><h2>最终排行榜</h2></div><span>TOP 27</span></div>
+    <p class="ranking-help">最终总分由三位复审评委各占 20%、终审评委占 40%，再直接计入宣传视频附加分。榜单仅显示最终总分与附加分；点击任意一行可查看个人完整详情。</p>
+    <div class="legend"><span class="final">深海金 · 最终名次</span><span class="semi-out">琥珀色 · 止步复审</span><span class="prelim-out">玫瑰色 · 止步初审</span></div>
+    <div class="podium-stage">
+      <div class="ceremony"><small>OCEAN OF US · FINAL CEREMONY</small><h3>最终荣耀</h3></div>
+      <div class="podium" id="podium"></div>
+    </div>
+    <div class="popularity-award" id="popularityAward"></div>
     <div id="list"></div>
   </section>
-  <footer>OCEAN RANK © 2026 · FINALISTS EDITION</footer>
-  <script src="rank-data-v16.js?v=16"></script>
+  <footer>OCEAN RANK © 2026 · FINAL RESULTS EDITION</footer>
+  <script src="rank-data-v17.js?v=17"></script>
   <script src="promotion-data-v1.js?v=1"></script>
   <script>
     const esc=value=>String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
-    const finalists=contestants.filter(item=>item.status==="finalist");
-    const semifinalOut=contestants.filter(item=>item.status==="semifinal_eliminated");
-    const prelimOut=contestants.filter(item=>item.status==="prelim_eliminated");
-    const detailUrl=item=>`detail.html?id=${item.id}&scores=15`;
-    const score=item=>Number(item.total).toFixed(2);
+    const finalists=contestants.filter(item=>item.status==="finalist").sort((a,b)=>a.finalRank-b.finalRank);
+    const semifinalOut=contestants.filter(item=>item.status==="semifinal_eliminated").sort((a,b)=>a.rank-b.rank);
+    const prelimOut=contestants.filter(item=>item.status==="prelim_eliminated").sort((a,b)=>a.prelimRank-b.prelimRank);
+    const detailUrl=item=>`detail.html?id=${item.id}&scores=17`;
+    const finalScore=item=>Number(item.finalScore).toFixed(2);
+    const semifinalScore=item=>Number(item.total).toFixed(2);
     const promotionById=new Map(promotionSnapshot.contestants.map(item=>[item.participantId,item]));
     const formatCount=value=>Number(value).toLocaleString("zh-CN");
     const promotionLine=item=>{
       const promotion=promotionById.get(item.id);
       if(!promotion)return "宣传数据待核对";
-      if(promotion.status==="ok")return `播放 ${formatCount(promotion.views)} · 点赞 ${formatCount(promotion.likes)} · 宣传加分 +${promotion.bonus}`;
-      if(promotion.status==="unavailable")return "宣传视频当前不可见 · 宣传加分 +1";
-      return "未发布宣传视频 · 宣传加分 +1";
+      if(promotion.status==="ok")return `播放 ${formatCount(promotion.views)} · 点赞 ${formatCount(promotion.likes)} · 宣传附加分 +${promotion.bonus}`;
+      if(promotion.status==="unavailable")return "宣传视频当前不可见 · 宣传附加分 +1";
+      return "未发布宣传视频 · 宣传附加分 +1";
     };
+    const bonus=item=>Number(item.promotionBonus??promotionById.get(item.id)?.bonus??0);
+    const tierClass=rank=>rank<=5?"tier-excellence":rank<=10?"tier-honour":"tier-finalist";
+
     document.getElementById("podium").innerHTML=finalists.slice(0,3).map(item=>`
-      <a href="${detailUrl(item)}" class="card">
-        <small>SEMIFINAL RANK</small><strong>${String(item.rank).padStart(2,"0")}</strong>
-        <h3>${esc(item.name)}</h3><span>参赛编号 ${item.id}<br>复审序号 ${item.finalSequence} · ${score(item)} 分</span><i class="promo-chip">${promotionLine(item)}</i>
+      <a href="${detailUrl(item)}" class="winner-card place-${item.finalRank}">
+        <span class="winner-rank">FINAL RANK ${String(item.finalRank).padStart(2,"0")}</span>
+        <strong>${finalScore(item)}</strong>
+        <h3>${esc(item.name)}</h3>
+        <span>复审序号 ${String(item.finalSequence).padStart(2,"0")}</span>
+        <i>宣传附加分 +${bonus(item)}</i>
       </a>`).join("");
 
+    const popularity=promotionSnapshot.bestPopularity;
+    document.getElementById("popularityAward").innerHTML=`
+      <div><small>BEST POPULARITY AWARD</small><b>最佳人气奖 · ${esc(popularity.name)}</b></div>
+      <p>参赛编号 ${popularity.participantId} · 播放 ${formatCount(popularity.views)} · 点赞 ${formatCount(popularity.likes)}</p>`;
+
     const finalistRows=finalists.slice(3).map(item=>`
-      <a href="${detailUrl(item)}" class="row finalist-row">
-        <div class="rank-number">${String(item.rank).padStart(2,"0")}</div>
-        <div class="identity"><b>${esc(item.name)}</b><span>参赛编号 ${item.id} · 复审序号 ${item.finalSequence} · 晋级终审<br>${promotionLine(item)}</span></div>
-        <div class="row-score"><b>${score(item)}</b><small>复审得分</small></div>
+      <a href="${detailUrl(item)}" class="row ${tierClass(item.finalRank)}">
+        <div class="rank-number">${String(item.finalRank).padStart(2,"0")}</div>
+        <div class="identity"><b>${esc(item.name)}</b><span>参赛编号 ${item.id} · 复审序号 ${String(item.finalSequence).padStart(2,"0")} · <span class="bonus">宣传附加分 +${bonus(item)}</span></span></div>
+        <div class="row-score"><b>${finalScore(item)}</b><small>最终总分</small></div>
       </a>`).join("");
 
     const semifinalOutRows=semifinalOut.map(item=>`
       <a href="${detailUrl(item)}" class="row semifinal-out-row">
         <div class="rank-number">${String(item.rank).padStart(2,"0")}</div>
         <div class="identity"><b>${esc(item.name)}</b><span>参赛编号 ${item.id} · 复审序号 ${item.finalSequence} · 未晋级终审<br>${promotionLine(item)}</span></div>
-        <div class="row-score"><b>${score(item)}</b><small>复审得分</small></div>
+        <div class="row-score"><b>${semifinalScore(item)}</b><small>复审得分</small></div>
       </a>`).join("");
 
     const prelimOutRows=prelimOut.map(item=>`
@@ -109,14 +141,14 @@
       result.style.display="block";
       result.className="result";
       if(!item){result.innerHTML=`未找到参赛编号 <b>${esc(input.value||"—")}</b>`;return;}
-      if(item.status==="semifinal_eliminated") result.classList.add("is-semifinal-out");
-      if(item.status==="prelim_eliminated") result.classList.add("is-prelim-out");
+      if(item.status==="semifinal_eliminated")result.classList.add("is-semifinal-out");
+      if(item.status==="prelim_eliminated")result.classList.add("is-prelim-out");
       if(item.status==="finalist"){
-        result.innerHTML=`<a href="${detailUrl(item)}"><strong>#${item.rank}</strong><b>${esc(item.name)}</b> · 参赛编号 ${item.id} · 复审 ${score(item)} 分 · 晋级终审<br>${promotionLine(item)}<br><small>点击查看各项得分、宣传数据与六位评委评语 →</small></a>`;
+        result.innerHTML=`<a href="${detailUrl(item)}"><strong>#${item.finalRank}</strong><b>${esc(item.name)}</b> · 参赛编号 ${item.id} · 最终总分 ${finalScore(item)} · 宣传附加分 +${bonus(item)}<br><small>点击查看完整评分与七位评委记录 →</small></a>`;
       }else if(item.status==="semifinal_eliminated"){
-        result.innerHTML=`<a href="${detailUrl(item)}"><strong>#${item.rank}</strong><b>${esc(item.name)}</b> · 参赛编号 ${item.id} · 复审 ${score(item)} 分 · 未晋级终审<br>${promotionLine(item)}<br><small>点击查看各项得分、宣传数据与六位评委评语 →</small></a>`;
+        result.innerHTML=`<a href="${detailUrl(item)}"><strong>#${item.rank}</strong><b>${esc(item.name)}</b> · 参赛编号 ${item.id} · 复审 ${semifinalScore(item)} 分 · 未晋级终审<br><small>点击查看各项得分、宣传数据与评委评语 →</small></a>`;
       }else{
-        result.innerHTML=`<a href="${detailUrl(item)}"><strong>OUT</strong><b>${esc(item.name)}</b> · 参赛编号 ${item.id} · 初审第 ${item.prelimRank} 名 · 未晋级复审<br>${promotionLine(item)}<br><small>点击查看宣传数据与评委评语 →</small></a>`;
+        result.innerHTML=`<a href="${detailUrl(item)}"><strong>OUT</strong><b>${esc(item.name)}</b> · 参赛编号 ${item.id} · 初审第 ${item.prelimRank} 名 · 未晋级复审<br><small>点击查看宣传数据与评委评语 →</small></a>`;
       }
     });
   </script>
